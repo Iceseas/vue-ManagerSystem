@@ -1,0 +1,71 @@
+<template>
+<div class="asideNav_body">
+      <el-menu
+      default-active="2"
+      class="el-menu-vertical-demo"
+      >
+      <el-submenu index="1">
+        <template slot="title">
+          <i class="el-icon-s-custom"></i>
+          <span>人员管理</span>
+        </template>
+          <el-menu-item index="1-1">
+            <router-link tag="span" to="/Managerindex/accesslog">
+            访问记录
+            </router-link>
+          </el-menu-item>
+      </el-submenu>
+      <el-submenu index="2">
+        <template slot="title">
+          <i class="el-icon-s-order"></i>
+          <span>题库管理</span>
+        </template>
+          <el-menu-item index="2-1">题型管理</el-menu-item>
+          <el-menu-item index="2-2">
+            <router-link tag="span" to="/Managerindex/showallquestion">
+            查看题库
+            </router-link>
+          </el-menu-item>
+      </el-submenu>
+      <el-submenu index="3">
+        <template slot="title">
+          <i class="el-icon-s-tools"></i>
+          <span>系统设置</span>
+        </template>
+          <el-menu-item index="3-1">基本设置</el-menu-item>
+          <el-menu-item index="3-2">系统日志</el-menu-item>
+      </el-submenu>
+      <el-submenu index="4">
+        <template slot="title">
+          <i class="el-icon-menu"></i>
+          <span>管理员</span>
+        </template>
+          <el-menu-item index="4-1">权限管理</el-menu-item>
+          <el-menu-item index="4-2">管理员列表</el-menu-item>
+      </el-submenu>
+    </el-menu>
+</div>
+</template>
+
+<script>
+export default {
+  data(){
+    return{
+      
+    }
+  },
+    methods: {
+      
+  }
+}
+</script>
+
+<style>
+.asideNav_body{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255,1);
+    overflow: hidden;
+}
+</style>
