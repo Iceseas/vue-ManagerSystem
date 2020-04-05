@@ -150,6 +150,7 @@ export default {
       },
       onAddQuestionSubmit(){
         this.$emit('add',this.NewDataForm)
+        this.$store.state.isupdataFromShow = false
       }
     },
     props:{
