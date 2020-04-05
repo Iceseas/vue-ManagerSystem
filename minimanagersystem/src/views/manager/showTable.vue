@@ -2,8 +2,8 @@
     <div>
         <el-row class="showquestions_serch_add">
         <el-col :span="8">
-            <div class="grid-content bg-purple">
-        
+            <div class="grid-content  addData_box">
+                <el-button type="primary" @click="addNewQuestion()">添加新题<i class="el-icon-upload el-icon--right"></i></el-button>
             </div>
         </el-col>
         <el-col :span="8">
@@ -21,8 +21,8 @@
             </div>
         </el-col>
         <el-col :span="8">
-            <div class="grid-content bg-purple">
-
+            <div class="grid-content addData_box" style="text-align:right">
+                <el-button type="primary" @click="freshTableData()">刷新数据<i class="el-icon-upload el-icon--right"></i></el-button>
             </div>
         </el-col>
         </el-row>
@@ -63,7 +63,8 @@
             </div>
         </el-col>
         </el-row>
-        <div v-if="this.$store.state.isupdataFromShow" id="dialogBodybox" class="dialog-bodybox">
+        <div class="masking_out" v-if="this.$store.state.isupdataFromShow">
+        <div  id="dialogBodybox" class="dialog-bodybox">
             <div class="dialog_body_header" @mousedown="mousemove">
                 <span class="dialog_close_title">编辑数据</span>
                 <span class="dialog_close_span" @click="close_doalog">
@@ -71,14 +72,15 @@
                 </span>
             </div>
             <div class="updataForm">
-                <updataForm v-on:update="getUpdateData" :data = "data" ></updataForm>
+                <updataForm v-on:add="getAddData" v-on:update="getUpdateData" :data = "data" ></updataForm>
             </div>
+        </div>
         </div>
     </div>
 </template>
 
 <script>
-import updataForm from '../../components/updateForm.vue'
+import updataForm from '../../components/showForm.vue'
 export default {
     data(){
         return{
@@ -138,14 +140,17 @@ export default {
         this.$store.commit('getUpdateData',data);
         this.$store.dispatch('update_listData_AJAX')
       },
-      pagerefresh(){
-          this.$router.push({
-              path: 'showQuestionTab',
-          })
+      getAddData(data){
+          console.log('adddata',data)
+      },
+      addNewQuestion(){
+          this.$store.state.addQuestion = true
+          this.$store.state.isupdataFromShow = true
       }
     },
     beforeDestroy() {
         this.$store.state.isupdataFromShow = false
+        
     },
     components:{
         updataForm:updataForm
@@ -153,7 +158,28 @@ export default {
     
 }
 </script>
-
+ 
 <style scoped>
-    
+.addData_box{
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    text-align: left;
+} 
+.updataForm{
+    height: auto;
+    text-align: left;
+    box-sizing: border-box;
+    padding: 20px;
+    z-index: 6;
+}
+.masking_out{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+}
 </style>

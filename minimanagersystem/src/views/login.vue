@@ -9,21 +9,29 @@
                     </div>
             </div>
             <div v-if="!isshowreg" class="middlelogin_body_right login_item">
+                <form>
                 <label class="login_username_lable" for="login_username">Username:</label>
                 <div class="login_username">
                     <i class="el-icon-s-custom"></i>
-                    <input class="login_username_input" id="login_username" type="text" placeholder="请输入您的用户名">
+                    <input class="login_username_input" id="login_username" v-model="managerCount" type="text" placeholder="请输入您的用户名">
                 </div>
-                 <label class="login_password_lable" for="login_password">Userpassword:</label>
-                <div class="login_password">
+                <label class="login_username_lable" for="login_TeacherID">TeacherID:</label>
+                <div class="login_username">
+                    <i class="el-icon-suitcase-1"></i>
+                    <input class="login_username_input" id="login_TeacherID" v-model="TeacherID" type="text" placeholder="请输入您的教师工号">
+                </div>
+                <label class="login_username_lable" for="login_password">Userpassword:</label>
+                <div class="login_username">
                     <i class="el-icon-s-cooperation"></i>
-                    <input class="login_password_input" id="login_password" type="password" placeholder="请输入您的密码">
+                    <input class="login_username_input" id="login_password" v-model="managerpassword" type="password" autocomplete="off" placeholder="请输入您的密码">
                 </div>
                 <div class="login_isremember">
                     <el-radio v-model="radio" label="1">记住密码</el-radio>
                 </div>
+                </form>
                     <button class="login_button" @click="handleLogin()"><i class="el-icon-switch-button button_icon"></i></button>
                 <span class="closelogin" @click="handleCloselogin()"><i class="el-icon-error"></i></span>
+            
             </div>
             <div v-if="isshowreg" class="middlelogin_body_right reg_item"></div>
         </div>
@@ -38,6 +46,7 @@
 
 <script>
 import userimg from '../assets/user.png'
+import axios from 'axios'
 export default {
     data(){
         return{
@@ -45,7 +54,10 @@ export default {
             ishowimg:true,
             isshowlogin:false,
             isshowreg:false,
-            radio: '0'
+            radio: '0',
+            TeacherID:'',
+            managerCount:'',
+            managerpassword:''
         }
     },
     methods: {
@@ -62,8 +74,30 @@ export default {
             },600)
         },
         handleLogin(){
-            this.$router.push('/Managerindex')
-        }
+            let that = this
+            axios({
+                    url: 'http://localhost:3000/ManagerCount/api/checkLogin',
+                    method: 'POST',
+                    data: {
+                        "TeacherID": this.TeacherID,
+                        "managerCount": this.managerCount,
+                        "managerpassword": this.managerpassword
+                    }
+                })
+                .then(res => {
+                    if (res.data.error == 0) {
+                        alert(res.data.msg)
+                        this.$store.commit('nowLoginUserCount',(that.managerCount)); 
+                        this.$router.push('/Managerindex')
+                    }
+                    else{
+                        alert(res.data.msg)
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })  
+        },
     },
 }
 </script>

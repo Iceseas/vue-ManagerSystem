@@ -1,5 +1,6 @@
 <template>
-    <div class="dialog-body">
+<div>
+    <div class="dialog-body" v-if="(this.$store.state.addQuestion)==false">
         <el-form label-position="left" ref="form" :model="NewDataForm" label-width="80px" size="mini">
         <el-form-item label="问题">
             <el-input v-model="data.Question" style="width: 400px;"></el-input>
@@ -39,9 +40,54 @@
             </el-radio-group>
         </el-form-item>
         <el-form-item size="large">
-            <el-button type="primary" @click="onSubmit(data)">立即创建</el-button>
+            <el-button type="primary" v-if="!(this.$store.state.addQuestion)" @click="onSubmit(data)">立即更新</el-button>
         </el-form-item>
         </el-form>
+    </div>
+    <div class="dialog-body" v-if="(this.$store.state.addQuestion)==true">
+        <el-form label-position="left" ref="form" :model="NewDataForm" label-width="80px" size="mini">
+        <el-form-item label="问题">
+            <el-input v-model="NewDataForm.Question" style="width: 400px;"></el-input>
+        </el-form-item>
+        <el-form-item label="选项A">
+          <el-input v-model="NewDataForm.Item1" style="width:400px"></el-input>
+        </el-form-item>
+        <el-form-item label="选项B">
+          <el-input v-model="NewDataForm.Item2" style="width:400px"></el-input>
+        </el-form-item>
+        <el-form-item label="选项C">
+          <el-input v-model="NewDataForm.Item3" :disabled="this.$store.state.updateItemDisabled" style="width:400px"></el-input>
+        </el-form-item>
+        <el-form-item label="选项D">
+          <el-input v-model="NewDataForm.Item4" :disabled="this.$store.state.updateItemDisabled" style="width:400px"></el-input>
+        </el-form-item>
+        <el-form-item label="正确答案">
+            <el-input v-model="NewDataForm.Answer" style="width: 200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="章节">
+            <el-cascader :options="options" v-model="NewDataForm.Chapter" clearable></el-cascader>
+        </el-form-item>
+        <el-form-item label="知识点">
+            <el-input v-model="NewDataForm.KN" style="width: 200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="难度" >
+            <el-radio-group style="width:100%" v-model="NewDataForm.difficulty">
+            <el-col :span="3">
+            <el-radio-button label="简单"></el-radio-button>
+            </el-col>
+            <el-col :span="3">
+            <el-radio-button label="较难"></el-radio-button>
+            </el-col>
+            <el-col :span="3">
+            <el-radio-button label="困难"></el-radio-button>
+            </el-col>
+            </el-radio-group>
+        </el-form-item>
+        <el-form-item size="large">
+            <el-button type="primary" v-if="this.$store.state.addQuestion" @click="onAddQuestionSubmit()">立即添加</el-button>
+        </el-form-item>
+        </el-form>
+    </div>
     </div>
 </template>
 
@@ -49,7 +95,17 @@
 export default {
     data() {
       return {
-        NewDataForm: null,
+        NewDataForm: {
+          'Question':'',
+          'Item1':'',
+          'Item2':'',
+          'Item3':'',
+          'Item4':'',
+          'Answer':'',
+          'KN':'',
+          'Chapter':'',
+          'difficulty':''
+        },
         options: [{
           value: 'Ch1',
           label: '第一章',
@@ -92,6 +148,9 @@ export default {
         this.$emit('update',this.NewDataForm)
         this.$store.state.isupdataFromShow = false
       },
+      onAddQuestionSubmit(){
+        this.$emit('add',this.NewDataForm)
+      }
     },
     props:{
       data:{

@@ -51,6 +51,12 @@
                     </el-dropdown>
                 </li>
             </ul>
+            <ul class="headernav_ShowUserMsg_ul">
+                <li class="headernav_ShowUserMsg_li">欢迎您：{{this.$store.state.nowLoginUserCount}}</li>
+                <li class="headernav_ShowUserMsg_li"><i class="el-icon-s-custom"></i></li>
+                <li class="headernav_ShowUserMsg_li"><i class="el-icon-message"></i></li>
+                <li class="headernav_ShowUserMsg_li"><i class="el-icon-download exiticon"></i></li>
+            </ul>
         </div>
     </div>
 </template>
@@ -60,7 +66,8 @@ export default {
     data(){
         return{
             activeIndex: '1',
-            activeIndex2: '1'
+            activeIndex2: '1',
+            welcomeManager:''
         }
     },
     methods: {
@@ -70,7 +77,10 @@ export default {
     //   handleCommand(command) {
     //     this.$message('click on item ' + command);
     //   }
-    }
+    },
+    mounted() {
+        console.log(this.$store.state.nowLoginUserCount)
+    },
 }
 </script>
 
@@ -79,7 +89,7 @@ export default {
 .el-dropdown{
     width: 100%;
     height: 100%;
-    z-index: 99;
+    z-index: 2;
     box-sizing: border-box;
 }
 .el-dropdown-link {
@@ -98,7 +108,7 @@ export default {
 .headernav_menu_ul{
     display: inline-block;
     height: 100%;
-    background-color: rgba(31, 35, 34,1);
+
 }
 .headernav_menu_ul_li{
     float: left;
@@ -134,5 +144,35 @@ export default {
 .header_logo{
     width: 100%;
     height: 100%;
+}
+.headernav_ShowUserMsg_ul{
+    height: 100%;
+    float: right;
+    list-style: none;
+    margin-right: 20px;
+    width: 600px;
+    display: flex;
+}
+.headernav_ShowUserMsg_li{
+    height: 100%;
+    color: #fff;
+    float: left;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.headernav_ShowUserMsg_li:nth-of-type(1){
+    width: 300px;
+    font-weight: 600;
+}
+.headernav_ShowUserMsg_li:nth-of-type(2)
+,.headernav_ShowUserMsg_li:nth-of-type(3)
+,.headernav_ShowUserMsg_li:nth-of-type(4){
+    flex: 1;
+    font-size: 20px;
+    cursor: pointer;
+}
+.exiticon{
+    transform: rotate(-90deg);
 }
 </style>

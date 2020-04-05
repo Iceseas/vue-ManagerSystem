@@ -7,20 +7,139 @@
             <el-breadcrumb-item :to="{ path: '/Managerindex/showallquestion' }">第一单元单元题</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-        <router-view></router-view>
+        <div class="questionTab" v-if="!showQuestionData">
+        <el-row :gutter="20">
+        <el-col :span="3">
+            <span @click="showSingle_C1()">
+           
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>单选</span>
+            </div>
+            <div class="cardChapter">
+                <span>第一单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        <el-col :span="3">
+            <span @click="showdecide()">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>判断</span>
+            </div>
+            <div class="cardChapter">
+                <span>综合</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        </el-row>
+        <el-row :gutter="20">
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        <el-col :span="3">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            鼠标悬浮时显示
+            </el-card>
+        </el-col>
+        </el-row>
+    </div>
+        <router-view v-if="showQuestionData"></router-view>
     </div>
 </template>
 
 <script>
-
 export default {
     data(){
         return{
-        
+            showQuestionData:false
         }
     },
     methods: {
-
+    showSingle_C1(){
+    console.log('进入C1')
+    this.$store.commit('changeNowQuestionType','single_C1'); 
+    this.$store.dispatch('get_PageInfo_AJAX')
+    //调用store中的请求数据
+    this.$store.dispatch('get_listData_AJAX')
+    this.showQuestionData = true
+    },
+    showdecide(){
+    console.log('进入de')
+    this.$store.commit('changeNowQuestionType','decide'); 
+    this.$store.dispatch('get_PageInfo_AJAX')
+    //调用store中的请求数据
+    this.$store.dispatch('get_listData_AJAX')
+    this.showQuestionData = true
+    },
     },
     mounted() {
         this.$store.commit('getVuethis',(this)); 
@@ -141,13 +260,7 @@ background-color: #fff;
     height: 20px;
     cursor: pointer;
 }
-.updataForm{
-    width: 100%;
-    height: auto;
-    text-align: left;
-    box-sizing: border-box;
-    padding: 20px;
-}
+
 .dialog_close_title{
     position: absolute;
     top: 50%;

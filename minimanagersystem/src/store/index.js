@@ -2,13 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        addQuestion: false,
+        nowLoginUserCount: '',
         tableData: [],
         cols: [],
-        access_token: '',
         vuethis: null,
         nowQuestionType: '',
         isgetSingleC1: false,
@@ -34,13 +36,22 @@ export default new Vuex.Store({
         changePageInfo(state, loop) {
             console.log('loop', loop)
             state.questionNum = loop * 10
+        },
+        nowLoginUserCount(state, loop) {
+            console.log('user', loop)
+            state.nowLoginUserCount = loop
+        },
+        changeNowQuestionType(state, loop) {
+            console.log('type', loop)
+            state.nowQuestionType = loop
         }
     },
     actions: {
         get_listData_AJAX(store) {
+            console.log('store', store.state.nowQuestionType)
             store.state.loading = true
             axios({
-                    url: 'http://localhost:3000/getQuestion/getlist',
+                    url: 'http://localhost:3000/getQuestion/api/getlist',
                     method: 'POST',
                     data: {
                         "questionNum": store.state.questionNum,
@@ -70,7 +81,7 @@ export default new Vuex.Store({
         update_listData_AJAX(store) {
             store.state.loading = true
             axios({
-                    url: 'http://localhost:3000/updateQuestion/updatelist',
+                    url: 'http://localhost:3000/updateQuestion/api/updatelist',
                     method: 'POST',
                     data: {
                         "data": store.state.updateData,
@@ -95,7 +106,7 @@ export default new Vuex.Store({
         },
         get_PageInfo_AJAX(store) {
             axios({
-                    url: 'http://localhost:3000/getPageInfo/getPageInfo',
+                    url: 'http://localhost:3000/getPageInfo/api/getPageInfo',
                     method: 'POST',
                     data: {
                         "nowQuestionType": store.state.nowQuestionType
@@ -108,7 +119,10 @@ export default new Vuex.Store({
                 .catch(err => {
                     console.log(err)
                 })
-        }
+        },
+
     },
-    modules: {}
+    plugins: [
+
+    ]
 })

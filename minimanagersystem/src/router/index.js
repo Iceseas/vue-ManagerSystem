@@ -6,7 +6,6 @@ import managerSystemIndex from '../views/managerSystemIndex.vue'
 import accesslog from '../views/manager/accesslog.vue'
 import showallquestion from '../views/manager/showallquestion.vue'
 import showTable from '../views/manager/showTable.vue'
-import showQuestionTab from '../views/manager/showQuestionTab.vue'
 
 Vue.use(VueRouter)
 
@@ -17,7 +16,6 @@ const routes = [{
     },
     {
         path: '/Managerindex',
-        name: 'managerindex',
         component: managerSystemIndex,
         children: [{
                 path: 'index',
@@ -31,23 +29,11 @@ const routes = [{
             },
             {
                 path: 'showallquestion',
-                name: 'showallquestion',
                 component: showallquestion,
                 children: [{
-                        path: 'showTable',
-                        name: 'showTable',
-                        component: showTable
-                    },
-                    {
-                        path: 'showQuestionTab',
-                        name: 'showQuestionTab',
-                        component: showQuestionTab
-                    },
-                    {
-                        path: '',
-                        redirect: 'showQuestionTab'
-                    }
-                ]
+                    path: 'showTable',
+                    component: showTable
+                }]
             },
             {
                 path: '',
