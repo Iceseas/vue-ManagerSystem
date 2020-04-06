@@ -2,8 +2,17 @@
     <div>
         <el-row class="showquestions_serch_add">
         <el-col :span="8">
-            <div class="grid-content  addData_box">
-                <el-button type="primary" @click="addNewQuestion()">添加新题<i class="el-icon-upload el-icon--right"></i></el-button>
+            <div class="grid-content  addData_box" v-if="(this.$store.state.nowQuestionType.substring(0,6))=='single'">
+                <el-button type="primary" @click="addNewQuestion()">添加选择题<i class="el-icon-upload el-icon--right"></i></el-button>
+            </div>
+            <div class="grid-content  addData_box" v-if="this.$store.state.nowQuestionType =='applicationQuestion'">
+                <el-button type="primary" @click="addNewQuestion()">添加大题<i class="el-icon-upload el-icon--right"></i></el-button>
+            </div>
+            <div class="grid-content  addData_box" v-if="(this.$store.state.nowQuestionType.substring(0,7))=='vacancy'">
+                <el-button type="primary" @click="addNewQuestion()">添加填空题<i class="el-icon-upload el-icon--right"></i></el-button>
+            </div>
+            <div class="grid-content  addData_box" v-if="this.$store.state.nowQuestionType =='decide'">
+                <el-button type="primary" @click="addNewQuestion()">添加判断题<i class="el-icon-upload el-icon--right"></i></el-button>
             </div>
         </el-col>
         <el-col :span="8">
@@ -22,7 +31,7 @@
         </el-col>
         <el-col :span="8">
             <div class="grid-content addData_box" style="text-align:right">
-                <el-button type="primary" @click="freshTableData()">刷新数据<i class="el-icon-upload el-icon--right"></i></el-button>
+                <el-button type="primary" @click="freshTableData()">刷新数据<i class="el-icon-refresh-left el-icon--right"></i></el-button>
             </div>
         </el-col>
         </el-row>
@@ -72,7 +81,9 @@
                 </span>
             </div>
             <div class="updataForm">
-                <updataForm v-on:add="getAddData" v-on:update="getUpdateData" :data = "data" ></updataForm>
+                <addApplicationFrom v-if="this.$store.state.addQuestion"></addApplicationFrom>
+                <!-- <addForm v-if="this.$store.state.addQuestion" v-on:getAddData="getAddData" ></addForm> -->
+                <updataForm v-else v-on:update="getUpdateData" :data = "data" ></updataForm>
             </div>
         </div>
         </div>
@@ -80,7 +91,9 @@
 </template>
 
 <script>
-import updataForm from '../../components/showForm.vue'
+import updataForm from '../../components/updateForm.vue'
+import addForm from '../../components/addDataForm.vue'
+import addApplicationFrom from '../../components/addShortAnswerQuestion.vue'
 export default {
     data(){
         return{
@@ -100,20 +113,30 @@ export default {
         this.$store.state.isupdataFromShow = true
         this.data = row
       },
+      freshTableData(){
+        this.$store.dispatch('get_PageInfo_AJAX')
+        this.$store.dispatch('get_listData_AJAX')
+      },
       handleDelete(index, row) {
-        console.log(index, row);
+        this.$store.commit('changeNowDeleteDataId',row.Id);
+        this.$store.dispatch('Delete_listData_AJAX')   
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
         this.$store.commit('changePageInfo',(val)); 
         switch(this.$store.state.nowQuestionType)
         {
             case 'single_C1':
+            this.$store.dispatch('get_PageInfo_AJAX')
             this.$store.dispatch('get_listData_AJAX')
             break;
             case 'decide':
+            this.$store.dispatch('get_PageInfo_AJAX')
             this.$store.dispatch('get_listData_AJAX')
             break;
+            case 'single_C2':
+            this.$store.dispatch('get_PageInfo_AJAX')
+            this.$store.dispatch('get_listData_AJAX')
+            break;  
         }
       },
       mousemove(event){
@@ -133,6 +156,7 @@ export default {
       },
       close_doalog(){
           this.$store.state.isupdataFromShow = false
+          this.$store.state.addQuestion = false
       },
       getUpdateData(data){
         console.log('data',data)
@@ -141,7 +165,9 @@ export default {
         this.$store.dispatch('update_listData_AJAX')
       },
       getAddData(data){
-          console.log('adddata',data)
+        console.log('adddata',data)
+        this.$store.commit('getAddData',data);
+        this.$store.dispatch('add_listData_AJAX')
       },
       addNewQuestion(){
           this.$store.state.addQuestion = true
@@ -153,7 +179,9 @@ export default {
         
     },
     components:{
-        updataForm:updataForm
+        updataForm:updataForm,
+        addForm:addForm,
+        addApplicationFrom:addApplicationFrom
     },
     
 }

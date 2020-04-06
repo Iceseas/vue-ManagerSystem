@@ -31,9 +31,15 @@ const routes = [{
                 path: 'showallquestion',
                 component: showallquestion,
                 children: [{
-                    path: 'showTable',
-                    component: showTable
-                }]
+                        path: 'showTable',
+                        name: 'showTable',
+                        component: showTable
+                    },
+                    {
+                        path: '',
+                        redirect: 'showTable'
+                    }
+                ]
             },
             {
                 path: '',

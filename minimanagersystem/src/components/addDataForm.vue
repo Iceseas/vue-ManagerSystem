@@ -1,0 +1,139 @@
+<template>
+    <div class="dialog-body">
+        <el-form label-position="left" ref="form" :model="NewDataForm" label-width="80px" size="mini">
+        <el-form-item label="问题">
+            <el-input v-model="NewDataForm.Question" style="width: 400px;"></el-input>
+        </el-form-item>
+        <el-form-item label="选项A">
+          <el-input v-model="NewDataForm.Item1" style="width:400px"></el-input>
+        </el-form-item>
+        <el-form-item label="选项B">
+          <el-input v-model="NewDataForm.Item2" style="width:400px"></el-input>
+        </el-form-item>
+        <el-form-item label="选项C">
+          <el-input v-model="NewDataForm.Item3" :disabled="this.$store.state.updateItemDisabled" style="width:400px"></el-input>
+        </el-form-item>
+        <el-form-item label="选项D">
+          <el-input v-model="NewDataForm.Item4" :disabled="this.$store.state.updateItemDisabled" style="width:400px"></el-input>
+        </el-form-item>
+        <el-form-item label="正确答案">
+            <el-radio-group style="width:100%" v-model="NewDataForm.Answer">
+            <el-col :span="3">
+            <el-radio-button label="A"></el-radio-button>
+            </el-col>
+            <el-col :span="3">
+            <el-radio-button label="B"></el-radio-button>
+            </el-col>
+            <el-col :span="3">
+            <el-radio-button label="C"></el-radio-button>
+            </el-col>
+            <el-col :span="3">
+            <el-radio-button label="D"></el-radio-button>
+            </el-col>
+            </el-radio-group>
+        </el-form-item>
+        <el-form-item label="章节">
+            <el-cascader :options="options" v-model="NewDataForm.Chapter" clearable></el-cascader>
+        </el-form-item>
+        <el-form-item label="知识点">
+            <el-input v-model="NewDataForm.KN" style="width: 200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="难度" >
+            <el-radio-group style="width:100%" v-model="NewDataForm.difficulty">
+            <el-col :span="3">
+            <el-radio-button label="简单"></el-radio-button>
+            </el-col>
+            <el-col :span="3">
+            <el-radio-button label="较难"></el-radio-button>
+            </el-col>
+            <el-col :span="3">
+            <el-radio-button label="困难"></el-radio-button>
+            </el-col>
+            </el-radio-group>
+        </el-form-item>
+        <el-form-item size="large">
+            <el-button type="primary" v-if="this.$store.state.addQuestion" @click="onAddQuestionSubmit()">立即添加</el-button>
+        </el-form-item>
+        </el-form>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+      return {
+        NewDataForm: {
+          'Question':'',
+          'Item1':'',
+          'Item2':'',
+          'Item3':'',
+          'Item4':'',
+          'Answer':'',
+          'KN':'',
+          'Chapter':'',
+          'difficulty':''
+        },
+        options: [{
+          value: 'Ch1',
+          label: '第一章',
+        }, {
+          value: 'Ch2',
+          label: '第二章',
+        }, {
+          value: 'Ch3',
+          label: '第三章',
+        },{
+          value: 'Ch4',
+          label: '第四章',
+        },{
+          value: 'Ch5',
+          label: '第五章',
+        },{
+          value: 'Ch6',
+          label: '第六章',
+        },{
+          value: 'Ch7',
+          label: '第七章',
+        },{
+          value: 'Ch8',
+          label: '第八章',
+        },{
+          value: 'Ch9',
+          label: '第九章',
+        },{
+          value: 'Ch10',
+          label: '第十章',
+        },{
+          value: 'Ch11',
+          label: '第十一章',
+        }]
+      };
+    },
+    methods: {
+      onAddQuestionSubmit(){
+        this.$emit('getAddData',this.NewDataForm)
+        this.$store.state.isupdataFromShow = false
+        this.$store.state.addQuestion = false
+      }
+    },
+    props:{
+      
+    },
+    mounted() {
+      if(this.$store.state.nowQuestionType == 'decide')
+      {
+        this.$store.state.updateItemDisabled = true
+      }
+      else{
+        this.$store.state.updateItemDisabled = false
+      }
+    },
+  };
+</script>
+
+<style scoped>
+.dialog-body{
+    width: 100%;
+    height: 100%;
+}   
+</style>

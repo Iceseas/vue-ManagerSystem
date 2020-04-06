@@ -122,6 +122,7 @@ export default {
 }
 .headernav_body{
     display: flex;
+    overflow: hidden;
 }
 .headernav_title{
     text-align: center;

@@ -1,16 +1,16 @@
 <template>
     <div class="showQuestions">
         <!-- 页头返回 -->
-        <div class="page-header">
+        <!-- <div class="page-header">
             <el-breadcrumb separator="/">
             <el-breadcrumb-item :to="{ path: '/Managerindex/index' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/Managerindex/showallquestion' }">第一单元单元题</el-breadcrumb-item>
             </el-breadcrumb>
-        </div>
+        </div> -->
         <div class="questionTab" v-if="!showQuestionData">
         <el-row :gutter="20">
         <el-col :span="3">
-            <span @click="showSingle_C1()">
+            <span @click="showSingle('single_C1')">
            
             <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
             <router-link tag="span" to="/Managerindex/showallquestion/showTable">
@@ -24,6 +24,221 @@
             </el-card>
             </span>
         </el-col>
+        <el-col :span="3">
+            <span @click="showSingle('single_C2')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>单选</span>
+            </div>
+            <div class="cardChapter">
+                <span>第二单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        <el-col :span="3">
+            <span @click="showSingle('single_C3')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>单选</span>
+            </div>
+            <div class="cardChapter">
+                <span>第三单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        <el-col :span="3">
+            <span @click="showSingle('single_C4_5')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>单选</span>
+            </div>
+            <div class="cardChapter">
+                <span>第四-五单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        <el-col :span="3">
+            <span @click="showSingle('single_C6')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>单选</span>
+            </div>
+            <div class="cardChapter">
+                <span>第六单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+       <el-col :span="3">
+            <span @click="showSingle('single_C7')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>单选</span>
+            </div>
+            <div class="cardChapter">
+                <span>第七单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        <el-col :span="3">
+            <span @click="showSingle('single_C10')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>单选</span>
+            </div>
+            <div class="cardChapter">
+                <span>第十单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+       <el-col :span="3">
+            <span @click="showSingle('single_C11')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>单选</span>
+            </div>
+            <div class="cardChapter">
+                <span>第十一单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        </el-row>
+        <el-row :gutter="20">
+        <el-col :span="3">
+            <span @click="showvacancy('vacancy_C1')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>填空</span>
+            </div>
+            <div class="cardChapter">
+                <span>第一单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+       <el-col :span="3">
+            <span @click="showvacancy('vacancy_C2')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>填空</span>
+            </div>
+            <div class="cardChapter">
+                <span>第二单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        <el-col :span="3">
+            <span @click="showvacancy('vacancy_C3')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>填空</span>
+            </div>
+            <div class="cardChapter">
+                <span>第三单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        <el-col :span="3">
+            <span @click="showvacancy('vacancy_C4_5')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>填空</span>
+            </div>
+            <div class="cardChapter">
+                <span>第四-五单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+       <el-col :span="3">
+            <span @click="showvacancy('vacancy_C6')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>填空</span>
+            </div>
+            <div class="cardChapter">
+                <span>第六单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+       <el-col :span="3">
+            <span @click="showvacancy('vacancy_C7')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>填空</span>
+            </div>
+            <div class="cardChapter">
+                <span>第七单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        <el-col :span="3">
+            <span @click="showvacancy('vacancy_C10')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>填空</span>
+            </div>
+            <div class="cardChapter">
+                <span>第十单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        <el-col :span="3">
+            <span @click="showvacancy('vacancy_C11')">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>填空</span>
+            </div>
+            <div class="cardChapter">
+                <span>第十一单元</span>
+            </div>
+            </router-link>
+            </el-card>
+            </span>
+        </el-col>
+        
+        </el-row>
+        <el-row :gutter="20">
         <el-col :span="3">
             <span @click="showdecide()">
             <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
@@ -39,77 +254,19 @@
             </span>
         </el-col>
         <el-col :span="3">
+           <span @click="showApplicationQuestion()">
             <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
+            <router-link tag="span" to="/Managerindex/showallquestion/showTable">
+            <div class="cardtitle">
+                <span>应用</span>
+            </div>
+            <div class="cardChapter">
+                <span>大题</span>
+            </div>
+            </router-link>
             </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        </el-row>
-        <el-row :gutter="20">
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
-        <el-col :span="3">
-            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
-            鼠标悬浮时显示
-            </el-card>
-        </el-col>
+            </span>
+        </el-col>   
         </el-row>
     </div>
         <router-view v-if="showQuestionData"></router-view>
@@ -124,22 +281,30 @@ export default {
         }
     },
     methods: {
-    showSingle_C1(){
-    console.log('进入C1')
-    this.$store.commit('changeNowQuestionType','single_C1'); 
+    showSingle(questionType){
+    this.$store.commit('changeNowQuestionType',questionType); 
     this.$store.dispatch('get_PageInfo_AJAX')
-    //调用store中的请求数据
     this.$store.dispatch('get_listData_AJAX')
     this.showQuestionData = true
     },
     showdecide(){
-    console.log('进入de')
     this.$store.commit('changeNowQuestionType','decide'); 
     this.$store.dispatch('get_PageInfo_AJAX')
-    //调用store中的请求数据
     this.$store.dispatch('get_listData_AJAX')
     this.showQuestionData = true
     },
+    showvacancy(questionType){
+    this.$store.commit('changeNowQuestionType',questionType); 
+    this.$store.dispatch('get_PageInfo_AJAX')
+    this.$store.dispatch('get_listData_AJAX')
+    this.showQuestionData = true
+    },
+    showApplicationQuestion(){
+    this.$store.commit('changeNowQuestionType','applicationQuestion'); 
+    this.$store.dispatch('get_PageInfo_AJAX')
+    this.$store.dispatch('get_listData_AJAX')
+    this.showQuestionData = true
+    }
     },
     mounted() {
         this.$store.commit('getVuethis',(this)); 

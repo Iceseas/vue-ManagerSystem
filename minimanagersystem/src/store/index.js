@@ -19,6 +19,8 @@ export default new Vuex.Store({
         ispageinfoshow: false,
         updateItemDisabled: false,
         updateData: null,
+        deleteDataId: null,
+        addData: null,
         loading: false,
         total: 40,
         questionNum: 10
@@ -33,6 +35,9 @@ export default new Vuex.Store({
         getUpdateData(state, loop) {
             state.updateData = loop
         },
+        getAddData(state, loop) {
+            state.addData = loop
+        },
         changePageInfo(state, loop) {
             console.log('loop', loop)
             state.questionNum = loop * 10
@@ -44,11 +49,13 @@ export default new Vuex.Store({
         changeNowQuestionType(state, loop) {
             console.log('type', loop)
             state.nowQuestionType = loop
+        },
+        changeNowDeleteDataId(state, loop) {
+            state.deleteDataId = loop
         }
     },
     actions: {
         get_listData_AJAX(store) {
-            console.log('store', store.state.nowQuestionType)
             store.state.loading = true
             axios({
                     url: 'http://localhost:3000/getQuestion/api/getlist',
@@ -95,9 +102,61 @@ export default new Vuex.Store({
                         store.state.vuethis.$nextTick(() => {
                             store.state.loading = false
                         })
-                        alert('更新成功！')
+                        alert('更新成功！请点击刷新数据！')
                     } else {
                         alert('更新失败，请检查参数')
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        add_listData_AJAX(store) {
+            store.state.loading = true
+            axios({
+                    url: 'http://localhost:3000/addQuestion/api/addQuestionData',
+                    method: 'POST',
+                    data: {
+                        "data": store.state.addData,
+                        "nowQuestionType": store.state.nowQuestionType
+                    }
+
+                })
+                .then(res => {
+                    console.log(res)
+                    if (res.data.AddmodelNewDataOresult.errcode == 0) {
+                        store.state.vuethis.$nextTick(() => {
+                            store.state.loading = false
+                        })
+                        alert('添加成功！请点击刷新数据！')
+                    } else {
+                        alert('添加失败，请检查参数')
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        Delete_listData_AJAX(store) {
+            store.state.loading = true
+            axios({
+                    url: 'http://localhost:3000/deleteQuestion/api/DeleteQuestionData',
+                    method: 'POST',
+                    data: {
+                        "Id": store.state.deleteDataId,
+                        "nowQuestionType": store.state.nowQuestionType
+                    }
+
+                })
+                .then(res => {
+                    console.log(res)
+                    if (res.data.DeletemodelDataresult.errcode == 0) {
+                        store.state.vuethis.$nextTick(() => {
+                            store.state.loading = false
+                        })
+                        alert('删除成功！请点击刷新数据！')
+                    } else {
+                        alert('删除失败，请检查！')
                     }
                 })
                 .catch(err => {
