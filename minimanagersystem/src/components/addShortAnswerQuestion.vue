@@ -17,7 +17,6 @@
   <el-form-item>
     <el-button type="primary" @click="submitForm('shortAnswerQuestion')">提交</el-button>
     <el-button @click="addChildQuestion">新增子问题</el-button>
-    <el-button @click="resetForm('shortAnswerQuestion')">重置</el-button>
   </el-form-item>
 </el-form>
 </template>
@@ -46,9 +45,6 @@
             return false;
           }
         });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
       },
       removeChildQuestion(item) {
         var index = this.shortAnswerQuestion.childQuestions.indexOf(item)

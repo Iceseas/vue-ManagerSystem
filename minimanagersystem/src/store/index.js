@@ -67,11 +67,34 @@ export default new Vuex.Store({
                 })
                 .then(res => {
                     store.state.cols = []
-                    for (var j = 0; j < res.data.cols_list.cols_list.length; j++) {
-                        var obj = {}
-                        obj.label = res.data.cols_list.cols_list[j].label
-                        obj.prop = res.data.cols_list.cols_list[j].prop
-                        store.state.cols.push(obj)
+                    if ('single_list' in res.data) {
+                        for (let u = 0; u < res.data.single_list.single_list.length; u++) {
+                            let obj1 = {}
+                            obj1.label = res.data.single_list.single_list[u].label
+                            obj1.prop = res.data.single_list.single_list[u].prop
+                            store.state.cols.push(obj1)
+                        }
+                    } else if ('decide_list' in res.data) {
+                        for (let v = 0; v < res.data.decide_list.decide_list.length; v++) {
+                            var obj2 = {}
+                            obj2.label = res.data.decide_list.decide_list[v].label
+                            obj2.prop = res.data.decide_list.decide_list[v].prop
+                            store.state.cols.push(obj2)
+                        }
+                    } else if ('vacancy_list' in res.data) {
+                        for (let w = 0; w < res.data.vacancy_list.vacancy_list.length; w++) {
+                            let obj3 = {}
+                            obj3.label = res.data.vacancy_list.vacancy_list[w].label
+                            obj3.prop = res.data.vacancy_list.vacancy_list[w].prop
+                            store.state.cols.push(obj3)
+                        }
+                    } else if ('application_list' in res.data) {
+                        for (let x = 0; x < res.data.application_list.application_list.length; x++) {
+                            let obj4 = {}
+                            obj4.label = res.data.application_list.application_list[x].label
+                            obj4.prop = res.data.application_list.application_list[x].prop
+                            store.state.cols.push(obj4)
+                        }
                     }
                     store.state.tableData = []
                     for (var i = 0; i < res.data.result.data.length; i++) {

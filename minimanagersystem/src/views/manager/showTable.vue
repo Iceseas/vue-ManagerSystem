@@ -2,17 +2,8 @@
     <div>
         <el-row class="showquestions_serch_add">
         <el-col :span="8">
-            <div class="grid-content  addData_box" v-if="(this.$store.state.nowQuestionType.substring(0,6))=='single'">
-                <el-button type="primary" @click="addNewQuestion()">添加选择题<i class="el-icon-upload el-icon--right"></i></el-button>
-            </div>
-            <div class="grid-content  addData_box" v-if="this.$store.state.nowQuestionType =='applicationQuestion'">
-                <el-button type="primary" @click="addNewQuestion()">添加大题<i class="el-icon-upload el-icon--right"></i></el-button>
-            </div>
-            <div class="grid-content  addData_box" v-if="(this.$store.state.nowQuestionType.substring(0,7))=='vacancy'">
-                <el-button type="primary" @click="addNewQuestion()">添加填空题<i class="el-icon-upload el-icon--right"></i></el-button>
-            </div>
-            <div class="grid-content  addData_box" v-if="this.$store.state.nowQuestionType =='decide'">
-                <el-button type="primary" @click="addNewQuestion()">添加判断题<i class="el-icon-upload el-icon--right"></i></el-button>
+            <div class="grid-content  addData_box">
+                <el-button type="primary" @click="addNewQuestion()">{{addButtonValue}}<i class="el-icon-upload el-icon--right"></i></el-button>
             </div>
         </el-col>
         <el-col :span="8">
@@ -93,7 +84,7 @@
 <script>
 import updataForm from '../../components/updateForm.vue'
 import addForm from '../../components/addDataForm.vue'
-import addApplicationFrom from '../../components/addShortAnswerQuestion.vue'
+import addApplicationFrom from '../../components/addApplicationQuestion.vue'
 export default {
     data(){
         return{
@@ -101,7 +92,26 @@ export default {
             currentPage4: 1,
             input3: '',
             select: '',
-            loading:false
+            loading:false,
+            addButtonValue:''
+        }
+    },
+    mounted() {
+        if(this.$store.state.nowQuestionType.substring(0,6) =='single')
+        {
+            this.addButtonValue='添加选择题'
+        }
+        else if(this.$store.state.nowQuestionType =='applicationQuestion')
+        {
+            this.addButtonValue='添加大题'
+        }
+        else if(this.$store.state.nowQuestionType.substring(0,7)=='vacancy')
+        {
+            this.addButtonValue='添加填空题'
+        }
+        else if(this.$store.state.nowQuestionType =='decide')
+        {
+            this.addButtonValue='添加判断题'
         }
     },
     created() {
