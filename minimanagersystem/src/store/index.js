@@ -7,7 +7,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        addQuestion: false,
+        addNewQuestionFromShow: false,
+        updateQuestionFormShow: false,
         nowLoginUserCount: '',
         tableData: [],
         cols: [],
@@ -15,7 +16,7 @@ export default new Vuex.Store({
         nowQuestionType: '',
         isgetSingleC1: false,
         isgetDecide: false,
-        isupdataFromShow: false,
+        isFromShow: false,
         ispageinfoshow: false,
         updateItemDisabled: false,
         updateData: null,

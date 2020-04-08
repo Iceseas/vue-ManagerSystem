@@ -42,7 +42,7 @@
             <span @click="showSingle('single_C3')">
             <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
             <router-link tag="span" to="/Managerindex/showallquestion/showTable">
-            <div class="cardtitle">
+            <div class="cardtitle"> 
                 <span>单选</span>
             </div>
             <div class="cardChapter">

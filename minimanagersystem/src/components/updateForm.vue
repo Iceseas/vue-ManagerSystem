@@ -1,47 +1,158 @@
 <template>
     <div class="dialog-body">
-        <el-form label-position="left" ref="form" :model="NewDataForm" label-width="80px" size="mini">
-        <el-form-item label="问题">
-            <el-input v-model="data.Question" style="width: 400px;"></el-input>
-        </el-form-item>
-        <el-form-item label="选项A">
-          <el-input v-model="data.Item1" style="width:400px"></el-input>
-        </el-form-item>
-        <el-form-item label="选项B">
-          <el-input v-model="data.Item2" style="width:400px"></el-input>
-        </el-form-item>
-        <el-form-item label="选项C">
-          <el-input v-model="data.Item3" :disabled="this.$store.state.updateItemDisabled" style="width:400px"></el-input>
-        </el-form-item>
-        <el-form-item label="选项D">
-          <el-input v-model="data.Item4" :disabled="this.$store.state.updateItemDisabled" style="width:400px"></el-input>
-        </el-form-item>
-        <el-form-item label="正确答案">
-            <el-input v-model="data.Answer" style="width: 200px;"></el-input>
-        </el-form-item>
-        <el-form-item label="章节">
-            <el-cascader :options="options" v-model="data.Chapter" clearable></el-cascader>
-        </el-form-item>
-        <el-form-item label="知识点">
-            <el-input v-model="data.KN" style="width: 200px;"></el-input>
-        </el-form-item>
-        <el-form-item label="难度" >
-            <el-radio-group style="width:100%" v-model="data.difficulty">
-            <el-col :span="3">
-            <el-radio-button label="简单"></el-radio-button>
-            </el-col>
-            <el-col :span="3">
-            <el-radio-button label="较难"></el-radio-button>
-            </el-col>
-            <el-col :span="3">
-            <el-radio-button label="困难"></el-radio-button>
-            </el-col>
-            </el-radio-group>
-        </el-form-item>
-        <el-form-item size="large">
-            <el-button type="primary" v-if="!(this.$store.state.addQuestion)" @click="onSubmit(data)">立即更新</el-button>
-        </el-form-item>
-        </el-form>
+    <el-form v-if="this.$store.state.nowQuestionType.substring(0,6) =='single' || this.$store.state.nowQuestionType =='decide'" label-position="left" ref="form" :model="NewDataForm" label-width="80px" size="mini">
+    <el-form-item label="问题">
+        <el-input v-model="data.Question" style="width: 400px;"></el-input>
+    </el-form-item>
+    <el-form-item label="选项A">
+      <el-input v-model="data.Item1" style="width:400px"></el-input>
+    </el-form-item>
+    <el-form-item label="选项B">
+      <el-input v-model="data.Item2" style="width:400px"></el-input>
+    </el-form-item>
+    <el-form-item label="选项C">
+      <el-input v-model="data.Item3" :disabled="this.$store.state.updateItemDisabled" style="width:400px"></el-input>
+    </el-form-item>
+    <el-form-item label="选项D">
+      <el-input v-model="data.Item4" :disabled="this.$store.state.updateItemDisabled" style="width:400px"></el-input>
+    </el-form-item>
+    <el-form-item label="正确答案">
+        <el-input v-model="data.Answer" style="width: 200px;"></el-input>
+    </el-form-item>
+    <el-form-item label="章节">
+        <el-cascader :options="options" v-model="data.Chapter" clearable></el-cascader>
+    </el-form-item>
+    <el-form-item label="知识点">
+        <el-input v-model="data.KN" style="width: 200px;"></el-input>
+    </el-form-item>
+    <el-form-item label="难度" >
+        <el-radio-group style="width:100%" v-model="data.difficulty">
+        <el-col :span="3">
+        <el-radio-button label="简单"></el-radio-button>
+        </el-col>
+        <el-col :span="3">
+        <el-radio-button label="较难"></el-radio-button>
+        </el-col>
+        <el-col :span="3">
+        <el-radio-button label="困难"></el-radio-button>
+        </el-col>
+        </el-radio-group>
+    </el-form-item>
+    <el-form-item size="large">
+        <el-button type="primary" @click="onSubmit(data)">立即更新</el-button>
+    </el-form-item>
+    </el-form>
+    <!-- 添加大题 -->
+    <el-form v-if="this.$store.state.nowQuestionType =='applicationQuestion'" :model="NewDataForm" ref="applicationQuestion" label-width="100px" class="demo-dynamic">
+      <el-form-item label="主问题">
+      <el-input v-model="data.Question" style="width:400px"></el-input>
+      </el-form-item>
+      <el-form-item label="关系模式1">
+      <el-input v-model="data.Entity1" style="width:400px"></el-input>
+      </el-form-item>
+      <el-form-item label="关系模式2">
+      <el-input v-model="data.Entity2" style="width:400px"></el-input>
+      </el-form-item>
+      <el-form-item label="关系模式3">
+      <el-input v-model="data.Entity3" style="width:400px"></el-input>
+      </el-form-item>
+      <el-form-item label="关系模式4">
+      <el-input v-model="data.Entity4" style="width:400px"></el-input>
+      </el-form-item>
+      <el-form-item label="关系模式5">
+      <el-input v-model="data.Entity5" style="width:400px"></el-input>
+      </el-form-item>
+      <el-form-item label="子问题1">
+      <el-input v-model="data.ChildQuestion1" style="width:400px"></el-input>
+      </el-form-item>
+      <el-form-item label="子问题2">
+      <el-input v-model="data.ChildQuestion2" style="width:400px"></el-input>
+      </el-form-item>
+      <el-form-item label="子问题3">
+      <el-input v-model="data.ChildQuestion3" style="width:400px"></el-input>
+      </el-form-item>
+      <el-form-item label="子问题4">
+      <el-input v-model="data.ChildQuestion4" style="width:400px"></el-input>
+      </el-form-item>
+      <el-form-item label="子问题5">
+      <el-input v-model="data.ChildQuestion5" style="width:400px"></el-input>
+      </el-form-item>
+    <!--<el-form-item
+    v-for="(entityprop, index) in applicationQuestion.entityprops"
+    :label="'关系模式' + (index+1) "
+    :key="entityprop.key"
+    :prop="'entityprops.' + index + '.entity'"
+  >
+    <el-input v-model="entityprop.entity" style="width:100px"></el-input>
+    <el-input v-model="entityprop.prop" style="width:300px"></el-input>
+    <el-button @click.prevent="removeEntityProp(entityprop)" style="margin-left:10px">删除</el-button>
+  </el-form-item>
+  <el-form-item
+    v-for="(childQuestion, index) in applicationQuestion.childQuestions"
+    :label="'子问题(' + (index+1) +')'"
+    :key="childQuestion.key"
+    :prop="'childQuestions.' + index + '.value'"
+  >
+    <el-input v-model="childQuestion.value" style="width:400px"></el-input><el-button @click.prevent="removeChildQuestion(childQuestion)" style="margin-left:10px">删除</el-button>
+  </el-form-item> -->
+
+    <!-- <el-form-item
+    v-for="(sql) in applicationQuestion.sqls"
+    label="SQL:"
+    :key="sql.key"
+  >
+    <el-input v-model="sql.select" style="width:300px;display:block" ></el-input>
+    <el-input v-model="sql.from" style="width:300px;display:block"></el-input>
+    <el-input v-model="sql.where" style="width:300px;display:block"></el-input>
+    <el-input v-model="sql.group_by" style="width:300px;display:block"></el-input>
+    <el-input v-model="sql.having" style="width:300px;display:block"></el-input>
+    <el-button @click.prevent="removeSQL(sql)" style="margin-left:10px">删除</el-button>
+  </el-form-item> -->
+
+    <el-form-item size="large">
+        <el-button type="primary" @click="onSubmit(data)">立即更新</el-button>
+    </el-form-item>
+    </el-form>
+    <!-- 添加填空题 -->
+    <el-form v-if="this.$store.state.nowQuestionType.substring(0,7)=='vacancy'" label-position="left" ref="vacancyQuestion" :model="NewDataForm" label-width="80px" size="mini">
+    <el-form-item label="问题">
+        <el-input v-model="data.Question" style="width: 400px;"></el-input>
+    </el-form-item>
+    <el-form-item label="空位1答案">
+      <el-input v-model="data.Space1Answer" style="width:400px"></el-input>
+    </el-form-item>
+    <el-form-item label="空位2答案">
+      <el-input v-model="data.Space2Answer" style="width:400px"></el-input>
+    </el-form-item>
+    <el-form-item label="空位3答案">
+      <el-input v-model="data.Space3Answer" style="width:400px"></el-input>
+    </el-form-item>
+    <el-form-item label="空位4答案">
+      <el-input v-model="data.Space4Answer" style="width:400px"></el-input>
+    </el-form-item>
+    <el-form-item label="章节">
+        <el-cascader :options="options" v-model="data.Chapter" clearable></el-cascader>
+    </el-form-item>
+    <el-form-item label="知识点">
+        <el-input v-model="data.KN" style="width: 200px;"></el-input>
+    </el-form-item>
+    <el-form-item label="难度" >
+        <el-radio-group style="width:100%" v-model="data.difficulty">
+        <el-col :span="3">
+        <el-radio-button label="简单"></el-radio-button>
+        </el-col>
+        <el-col :span="3">
+        <el-radio-button label="较难"></el-radio-button>
+        </el-col>
+        <el-col :span="3">
+        <el-radio-button label="困难"></el-radio-button>
+        </el-col>
+        </el-radio-group>
+    </el-form-item>
+    <el-form-item size="large">
+        <el-button type="primary" @click="onSubmit(data)">立即更新</el-button>
+    </el-form-item>
+</el-form>
     </div>
 </template>
 

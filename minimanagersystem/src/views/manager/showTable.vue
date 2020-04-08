@@ -60,21 +60,22 @@
                 layout="total, prev, pager, next"
                 :total="this.$store.state.total">
                 </el-pagination>
-            </div>
+            </div> 
         </el-col>
         </el-row>
-        <div class="masking_out" v-if="this.$store.state.isupdataFromShow">
+        <div class="masking_out" v-if="this.$store.state.isFromShow">
         <div  id="dialogBodybox" class="dialog-bodybox">
             <div class="dialog_body_header" @mousedown="mousemove">
-                <span class="dialog_close_title">编辑数据</span>
+                <span class="dialog_close_title">{{FormTitle}}</span>
                 <span class="dialog_close_span" @click="close_doalog">
                     <i class="el-icon-close dialog_close"></i>
                 </span>
             </div>
             <div class="updataForm">
-                <addApplicationFrom v-if="this.$store.state.addQuestion"></addApplicationFrom>
-                <!-- <addForm v-if="this.$store.state.addQuestion" v-on:getAddData="getAddData" ></addForm> -->
-                <updataForm v-else v-on:update="getUpdateData" :data = "data" ></updataForm>
+                <!-- <addsingleQuestionForm v-show="this.$store.state.addQuestionFormShow" v-on:getAddData="getAddData" ></addsingleQuestionForm>
+                <addApplicationFrom v-show="this.$store.state.addQuestionFormShow" v-on:getAddData="getAddData"></addApplicationFrom> -->
+                <addNewQuestion v-if="this.$store.state.addNewQuestionFromShow" v-on:getAddData="getAddData"></addNewQuestion>
+                <updataForm v-if="this.$store.state.updateQuestionFormShow" v-on:update="getUpdateData" :data = "data" ></updataForm>
             </div>
         </div>
         </div>
@@ -83,8 +84,7 @@
 
 <script>
 import updataForm from '../../components/updateForm.vue'
-import addForm from '../../components/addDataForm.vue'
-import addApplicationFrom from '../../components/addApplicationQuestion.vue'
+import addNewQuestion from '../../components/addNewQuestion.vue'
 export default {
     data(){
         return{
@@ -93,25 +93,28 @@ export default {
             input3: '',
             select: '',
             loading:false,
-            addButtonValue:''
+            addButtonValue:'',
+            FormTitle:''
         }
     },
     mounted() {
         if(this.$store.state.nowQuestionType.substring(0,6) =='single')
         {
-            this.addButtonValue='添加选择题'
+            this.FormTitle = this.addButtonValue='添加选择题'
         }
         else if(this.$store.state.nowQuestionType =='applicationQuestion')
         {
-            this.addButtonValue='添加大题'
+           this.FormTitle = this.addButtonValue='添加大题'
+           
         }
         else if(this.$store.state.nowQuestionType.substring(0,7)=='vacancy')
         {
-            this.addButtonValue='添加填空题'
+            this.FormTitle = this.addButtonValue='添加填空题'
         }
         else if(this.$store.state.nowQuestionType =='decide')
         {
-            this.addButtonValue='添加判断题'
+            this.FormTitle = this.addButtonValue='添加判断题'
+
         }
     },
     created() {
@@ -119,8 +122,11 @@ export default {
     },
     methods: {
        handleEdit(index, row) {
+        this.FormTitle ='更新数据'
         console.log(index, row);
-        this.$store.state.isupdataFromShow = true
+        this.$store.state.isFromShow = true
+        this.$store.state.addNewQuestionFromShow = false
+        this.$store.state.updateQuestionFormShow = true
         this.data = row
       },
       freshTableData(){
@@ -165,8 +171,7 @@ export default {
           }
       },
       close_doalog(){
-          this.$store.state.isupdataFromShow = false
-          this.$store.state.addQuestion = false
+          this.$store.state.isFromShow = false
       },
       getUpdateData(data){
         console.log('data',data)
@@ -180,18 +185,18 @@ export default {
         this.$store.dispatch('add_listData_AJAX')
       },
       addNewQuestion(){
-          this.$store.state.addQuestion = true
-          this.$store.state.isupdataFromShow = true
+          this.$store.state.isFromShow = true
+          this.$store.state.updateQuestionFormShow = false
+          this.$store.state.addNewQuestionFromShow = true
       }
     },
     beforeDestroy() {
-        this.$store.state.isupdataFromShow = false
+        this.$store.state.isFromShow = false
         
     },
     components:{
         updataForm:updataForm,
-        addForm:addForm,
-        addApplicationFrom:addApplicationFrom
+        addNewQuestion:addNewQuestion
     },
     
 }
