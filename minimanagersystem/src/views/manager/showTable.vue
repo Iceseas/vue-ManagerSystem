@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="showTable_box">
         <el-row class="showquestions_serch_add">
         <el-col :span="8">
             <div class="grid-content  addData_box">
@@ -203,6 +203,10 @@ export default {
 </script>
  
 <style scoped>
+.showTable_box{
+    width: 100%;
+    height: 100%;
+}
 .addData_box{
     padding: 0;
     margin: 0;

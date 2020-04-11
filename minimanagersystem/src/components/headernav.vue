@@ -52,7 +52,7 @@
                 </li>
             </ul>
             <ul class="headernav_ShowUserMsg_ul">
-                <li class="headernav_ShowUserMsg_li">欢迎您：{{this.$store.state.nowLoginUserCount}}</li>
+                <li class="headernav_ShowUserMsg_li">欢迎您：宋老师{{this.$store.state.nowLoginUserCount}}</li>
                 <li class="headernav_ShowUserMsg_li"><i class="el-icon-s-custom"></i></li>
                 <li class="headernav_ShowUserMsg_li"><i class="el-icon-message"></i></li>
                 <li class="headernav_ShowUserMsg_li"><i class="el-icon-download exiticon"></i></li>
