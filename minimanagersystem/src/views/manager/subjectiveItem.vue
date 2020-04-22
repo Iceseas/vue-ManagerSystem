@@ -96,15 +96,9 @@ export default {
     methods: {
        handleEdit(index, row) {
         this.FormTitle ='查看主观题'
-        let newArr=[]
-        for(let i = 0;i<Array.from(row.problemsAnswer).length;i++)
-        {
-            newArr.push(JSON.parse(JSON.stringify(row.problemsAnswer[i])))
-        }
-        console.log(index,row,newArr );
         this.$store.state.isFromShow = true
         this.$store.state.SubjectiveFormShow = true
-        this.data = newArr
+        this.data = row
       },
       freshTableData(){
         this.$store.commit('changeNowQuestionType','subjective_publish'); 
@@ -147,10 +141,9 @@ export default {
           console.log('stop')
       },
       getSubjectiveData(data){
-        console.log('data',data)
-        //传递更新的数据
-        //this.$store.commit('getUpdateData',data);
-        //this.$store.dispatch('update_listData_AJAX')
+        console.log('downdata',data)
+        this.$store.commit('getAddData',data);
+        this.$store.dispatch('add_listData_AJAX')
       },
     },
     beforeDestroy() {

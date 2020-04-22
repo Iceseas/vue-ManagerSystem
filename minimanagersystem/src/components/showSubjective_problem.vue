@@ -1,20 +1,25 @@
 <template>
     <div class="dialog-body">
     <el-row>
-    <el-col class="card-box" :span="24" v-for="(item, index) in data" :key="index" >
+    <el-col class="card-box" :span="24" v-for="(item, index) in data.problemsAnswer" :key="index" >
         <el-card class="box-card" v-if="isshowCard">
         <div slot="header" class="clearfix">
             <span class="card-title">第{{index+1}}题</span>
             <button class="card_btn" :data-id="index" @click="getFatherData" >添加备注</button>
         </div>
-        <div class="card-main">{{item.value.value}}</div>
+        <div class="card-main">{{item.value.value}}
+
+        </div>
         </el-card>
         
     </el-col>
      <el-col class="card-box" :span="24" >
-       <div v-if="!isshowCard" >
+    <div v-if="!isshowCard" >
     <Editor class="CardModifyDataTestArea" v-on:input="GetinputData"  v-model="fatherData"></Editor>
     <button class="backCard" @click="BackCard">提交</button>
+    </div>
+    <div class="subBtn" v-if="isshowCard">
+        <el-button type="primary" @click="onSubmit(data)" round>提交</el-button>
     </div>
     </el-col>
     </el-row>
@@ -38,19 +43,19 @@ export default {
         let id = target.getAttribute('data-id')
         this.dataId = id
         this.isshowCard = false
-        this.fatherData = (JSON.parse(JSON.stringify(this.data[id]))).value.value
+        this.fatherData = (JSON.parse(JSON.stringify(this.data.problemsAnswer[id]))).value.value
       },
       onSubmit(data) {
+        console.log('提交',data)
         this.NewDataForm = data
-        this.$emit('showSubjective','123')
+        this.$emit('showSubjective',this.NewDataForm)
         this.$store.state.isFromShow = false
       },
       GetinputData(data)
       {
         let dataOne = data.slice(3)
         let dataFina = dataOne.substring(0,dataOne.length-4)
-        this.$set(this.data[this.dataId], this.data[this.dataId].value.value, dataFina)
-        this.data[this.dataId].value.value = dataFina
+        this.data.problemsAnswer[this.dataId].value.value = dataFina
       },
       BackCard(){
         console.log(this.data)
@@ -63,8 +68,7 @@ export default {
       }
     },
     mounted() {
-      
-
+      console.log(this.data.problemsAnswer)
     },
     updated() {
       
@@ -123,5 +127,9 @@ export default {
   color: #409EFF;
   font-size: 20px;
   font-weight: 600;
+}
+.subBtn{
+  width: 100%;
+  text-align: right;
 }
 </style>
