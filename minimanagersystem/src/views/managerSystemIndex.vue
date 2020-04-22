@@ -29,6 +29,9 @@ export default {
   methods: {
     
   },
+  mounted() {
+    this.$store.commit('getVuethis',(this)); 
+  },
 }
 </script>
 

@@ -203,16 +203,7 @@ export default {
 </script>
  
 <style scoped>
-.showTable_box{
-    width: 100%;
-    height: 100%;
-}
-.addData_box{
-    padding: 0;
-    margin: 0;
-    line-height: 0;
-    text-align: left;
-} 
+
 .updataForm{
     height: auto;
     text-align: left;

@@ -201,7 +201,7 @@ export default {
       onSubmit(data) {
         this.NewDataForm = data
         this.$emit('update',this.NewDataForm)
-        this.$store.state.isupdataFromShow = false
+        this.$store.state.isFromShow = false
       },
     },
     props:{

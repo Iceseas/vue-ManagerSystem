@@ -9,6 +9,7 @@ export default new Vuex.Store({
     state: {
         addNewQuestionFromShow: false,
         updateQuestionFormShow: false,
+        SubjectiveFormShow: false,
         nowLoginUserCount: '',
         tableData: [],
         cols: [],
@@ -67,6 +68,7 @@ export default new Vuex.Store({
                     }
                 })
                 .then(res => {
+                    console.log('res.data', res)
                     store.state.cols = []
                     if ('single_list' in res.data) {
                         for (let u = 0; u < res.data.single_list.single_list.length; u++) {
@@ -95,6 +97,13 @@ export default new Vuex.Store({
                             obj4.label = res.data.application_list.application_list[x].label
                             obj4.prop = res.data.application_list.application_list[x].prop
                             store.state.cols.push(obj4)
+                        }
+                    } else if ('subjective_publish_list' in res.data) {
+                        for (let y = 0; y < res.data.subjective_publish_list.subjective_publish_list.length; y++) {
+                            let obj5 = {}
+                            obj5.label = res.data.subjective_publish_list.subjective_publish_list[y].label
+                            obj5.prop = res.data.subjective_publish_list.subjective_publish_list[y].prop
+                            store.state.cols.push(obj5)
                         }
                     }
                     store.state.tableData = []

@@ -293,7 +293,7 @@ export default {
     }
     },
     mounted() {
-        this.$store.commit('getVuethis',(this)); 
+        
     },
     destroyed() {
         this.tableData = []

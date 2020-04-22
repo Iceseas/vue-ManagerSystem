@@ -20,7 +20,7 @@
           <i class="el-icon-s-order"></i>
           <span>题库管理</span>
         </template>
-          <el-menu-item index="2-1">
+          <el-menu-item index="2-1" @click="showSubjective_Problem">
             <router-link tag="span" class="WidthHeight100" to="/Managerindex/subjectiveItem">
             评分中心
             </router-link>
@@ -59,7 +59,12 @@ export default {
     }
   },
     methods: {
-      
+    showSubjective_Problem(){
+      console.log('gotosub')
+    this.$store.commit('changeNowQuestionType','subjective_publish'); 
+    this.$store.dispatch('get_PageInfo_AJAX')
+    this.$store.dispatch('get_listData_AJAX')
+    }
   }
 }
 </script>
