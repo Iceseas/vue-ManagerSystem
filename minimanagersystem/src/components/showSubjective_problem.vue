@@ -1,25 +1,37 @@
 <template>
     <div class="dialog-body">
     <el-row>
-    <el-col class="card-box" :span="24" v-for="(item, index) in data.problemsAnswer" :key="index" >
-        <el-card class="box-card" v-if="isshowCard">
+    <el-col class="card-box" :span="24" v-if="isshowCard">
+        <el-card class="box-card" v-for="(item, index) in data.problemsAnswer" :key="index" >
         <div slot="header" class="clearfix">
             <span class="card-title">第{{index+1}}题</span>
             <button class="card_btn" :data-id="index" @click="getFatherData" >添加备注</button>
         </div>
-        <div class="card-main">{{item.value.value}}
+        <div class="card-main">{{item}}
 
         </div>
         </el-card>
-        
-    </el-col>
-     <el-col class="card-box" :span="24" >
-    <div v-if="!isshowCard" >
-    <Editor class="CardModifyDataTestArea" v-on:input="GetinputData"  v-model="fatherData"></Editor>
-    <button class="backCard" @click="BackCard">提交</button>
+        <div class="subBtn" v-if="isshowCard">
+        <el-button type="primary" class="cardSubmit" @click="onSubmit(data)">提交</el-button>
     </div>
-    <div class="subBtn" v-if="isshowCard">
-        <el-button type="primary" @click="onSubmit(data)" round>提交</el-button>
+    </el-col>
+     <el-col class="card-box" :span="24" v-if="!isshowCard">
+       <div class="gradevalue" >
+         <label>评分：(也可以在输入框内输入分数)</label>
+        <el-slider
+          v-model="gradevalue"
+          show-input>
+        </el-slider>
+      </div>
+      <div>
+        <label for="remarkinput">添加评语：</label>
+      <el-input style="font-size:16px" @input="getInputValue" id="remarkinput" v-model="remark" :value="remark" autosize :data-id="dataId" type="textarea" placeholder="请输入内容" maxlength="300" show-word-limit>
+      </el-input>
+      </div>
+    <div>
+      <label class="CardModifyDatalable">添加备注：</label>
+    <Editor class="CardModifyDataTestArea" v-on:input="GetinputData"  v-model="fatherData"></Editor>
+    <el-button type="primary" class="backCard" @click="BackCard">提交</el-button>
     </div>
     </el-col>
     </el-row>
@@ -31,10 +43,12 @@ import  Editor from './editor';
 export default {
     data() {
       return {
-          NewDataForm:[],
+          NewDataForm:null,
           fatherData:'',
           dataId:null,
-          isshowCard:true
+          isshowCard:true,
+          remark:'',
+          gradevalue:7
       }
     },
     methods: {
@@ -43,11 +57,19 @@ export default {
         let id = target.getAttribute('data-id')
         this.dataId = id
         this.isshowCard = false
-        this.fatherData = (JSON.parse(JSON.stringify(this.data.problemsAnswer[id]))).value.value
+        this.remark = this.data.remark[this.dataId]
+        if(this.data.grade[this.dataId]=="")
+        {
+          this.gradevalue = 0
+        }
+        else{
+          this.gradevalue = this.data.grade[this.dataId]
+        }
+        this.fatherData = this.data.problemsAnswer[id]
       },
       onSubmit(data) {
-        console.log('提交',data)
         this.NewDataForm = data
+        console.log('提交',this.NewDataForm)
         this.$emit('showSubjective',this.NewDataForm)
         this.$store.state.isFromShow = false
       },
@@ -55,11 +77,18 @@ export default {
       {
         let dataOne = data.slice(3)
         let dataFina = dataOne.substring(0,dataOne.length-4)
-        this.data.problemsAnswer[this.dataId].value.value = dataFina
+        this.data.problemsAnswer[this.dataId]= dataFina
       },
       BackCard(){
+        this.data.remark[this.dataId] = this.remark
+        this.data.grade[this.dataId] = this.gradevalue
+        this.gradevalue = 7
+        this.remark = ''
         console.log(this.data)
         this.isshowCard = true
+      },
+      getInputValue(){
+        console.log(this.remark)
       }
     },
     props:{
@@ -122,6 +151,7 @@ export default {
 }
 .backCard{
   width: 80px;
+  margin-top: 10px;
 }
 .CardModifyTitle{
   color: #409EFF;
@@ -131,5 +161,17 @@ export default {
 .subBtn{
   width: 100%;
   text-align: right;
+}
+.gradevalue{
+  width: 100%;
+  box-sizing: border-box;
+
+}
+.CardModifyDatalable{
+  margin-top: 20px;
+  display: block;
+}
+.cardSubmit{
+  margin-top: 10px;
 }
 </style>
