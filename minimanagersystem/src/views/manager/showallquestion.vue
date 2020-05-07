@@ -250,6 +250,18 @@
             </el-card>
             </span>
         </el-col>   
+        <el-col :span="3">
+           <span @click="showAllsingleQuestion()">
+            <el-card :body-style="{padding:'0px',cursor: 'pointer'}" shadow="always">
+            <div class="cardtitle">
+                <span>单选</span>
+            </div>
+            <div class="cardChapter">
+                <span>题库</span>
+            </div>
+            </el-card>
+            </span>
+        </el-col>   
         </el-row>
     </div>
     </div>
@@ -286,6 +298,13 @@ export default {
     },
     showApplicationQuestion(){
     this.$store.commit('changeNowQuestionType','applicationQuestion'); 
+    this.$store.dispatch('get_PageInfo_AJAX')
+    this.$store.dispatch('get_listData_AJAX')
+    this.showQuestionData = true
+    this.$router.push('showTable')
+    },
+    showAllsingleQuestion(){
+    this.$store.commit('changeNowQuestionType','single_models'); 
     this.$store.dispatch('get_PageInfo_AJAX')
     this.$store.dispatch('get_listData_AJAX')
     this.showQuestionData = true

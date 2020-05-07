@@ -153,6 +153,14 @@ export default {
             this.$store.dispatch('get_PageInfo_AJAX')
             this.$store.dispatch('get_listData_AJAX')
             break;  
+            case 'vacancy_C1':
+            this.$store.dispatch('get_PageInfo_AJAX')
+            this.$store.dispatch('get_listData_AJAX')
+            break; 
+            case 'single_models':
+            this.$store.dispatch('get_PageInfo_AJAX')
+            this.$store.dispatch('get_listData_AJAX')
+            break; 
         }
       },
       mousemove(event){

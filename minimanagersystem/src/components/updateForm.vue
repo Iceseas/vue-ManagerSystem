@@ -136,6 +136,16 @@
     <el-form-item label="知识点">
         <el-input v-model="data.KN" style="width: 200px;"></el-input>
     </el-form-item>
+        <el-form-item label="遵循顺序" >
+        <el-radio-group style="width:100%" v-model="data.Issequence">
+        <el-col :span="3">
+        <el-radio-button label="true"></el-radio-button>
+        </el-col>
+        <el-col :span="3">
+        <el-radio-button label="false"></el-radio-button>
+        </el-col>
+        </el-radio-group>
+    </el-form-item>
     <el-form-item label="难度" >
         <el-radio-group style="width:100%" v-model="data.difficulty">
         <el-col :span="3">
