@@ -100,20 +100,25 @@ export default {
     mounted() {
         if(this.$store.state.nowQuestionType.substring(0,6) =='single')
         {
-            this.FormTitle = this.addButtonValue='添加选择题'
+            this.FormTitle = '添加选择题'
+            this.addButtonValue='添加选择题'
         }
         else if(this.$store.state.nowQuestionType =='applicationQuestion')
         {
-           this.FormTitle = this.addButtonValue='添加大题'
+           this.FormTitle = '添加大题'
+           this.addButtonValue='添加大题'
            
         }
         else if(this.$store.state.nowQuestionType.substring(0,7)=='vacancy')
         {
-            this.FormTitle = this.addButtonValue='添加填空题'
+            console.log('111')
+            this.FormTitle = '添加填空题'
+            this.addButtonValue='添加填空题'
         }
         else if(this.$store.state.nowQuestionType =='decide')
         {
-            this.FormTitle = this.addButtonValue='添加判断题'
+            this.FormTitle = '添加判断题'
+            this.addButtonValue='添加判断题'
 
         }
     },

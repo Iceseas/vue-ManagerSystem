@@ -138,12 +138,12 @@ export default {
           this.$store.state.isFromShow = false
       },
       stop(){
-          console.log('stop')
+          console.log('stop') 
       },
       getSubjectiveData(data){
         console.log('downdata',data)
-        this.$store.commit('getAddData',data);
-        this.$store.dispatch('add_listData_AJAX')
+        this.$store.commit('getUpdateData',data);
+        this.$store.dispatch('update_listData_AJAX')
       },
     },
     beforeDestroy() {

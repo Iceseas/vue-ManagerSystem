@@ -2,32 +2,31 @@
     <div class="dialog-body">
     <el-row>
     <el-col class="card-box" :span="24" v-if="isshowCard">
+      <div class="gradevalue" >
+         <label>评分：(也可以在输入框内输入分数)</label>
+        <el-slider
+          v-model="data.grade"
+          show-input>
+        </el-slider>
+      </div>
+      <div>
+        <label for="remarkinput">添加评语：</label>
+      <el-input style="font-size:16px" id="remarkinput" v-model="data.remark" :value="data.remark" autosize :data-id="dataId" type="textarea" placeholder="请输入内容" maxlength="300" show-word-limit>
+      </el-input>
+      </div>
         <el-card class="box-card" v-for="(item, index) in data.problemsAnswer" :key="index" >
         <div slot="header" class="clearfix">
             <span class="card-title">第{{index+1}}题</span>
             <button class="card_btn" :data-id="index" @click="getFatherData" >添加备注</button>
         </div>
-        <div class="card-main">{{item}}
-
-        </div>
+        <div class="card-main">{{item}}</div>
         </el-card>
         <div class="subBtn" v-if="isshowCard">
         <el-button type="primary" class="cardSubmit" @click="onSubmit(data)">提交</el-button>
     </div>
     </el-col>
      <el-col class="card-box" :span="24" v-if="!isshowCard">
-       <div class="gradevalue" >
-         <label>评分：(也可以在输入框内输入分数)</label>
-        <el-slider
-          v-model="gradevalue"
-          show-input>
-        </el-slider>
-      </div>
-      <div>
-        <label for="remarkinput">添加评语：</label>
-      <el-input style="font-size:16px" @input="getInputValue" id="remarkinput" v-model="remark" :value="remark" autosize :data-id="dataId" type="textarea" placeholder="请输入内容" maxlength="300" show-word-limit>
-      </el-input>
-      </div>
+       
     <div>
       <label class="CardModifyDatalable">添加备注：</label>
     <Editor class="CardModifyDataTestArea" v-on:input="GetinputData"  v-model="fatherData"></Editor>
@@ -47,8 +46,6 @@ export default {
           fatherData:'',
           dataId:null,
           isshowCard:true,
-          remark:'',
-          gradevalue:7
       }
     },
     methods: {
@@ -67,7 +64,7 @@ export default {
         }
         this.fatherData = this.data.problemsAnswer[id]
       },
-      onSubmit(data) {
+      onSubmit(data) { 
         this.NewDataForm = data
         console.log('提交',this.NewDataForm)
         this.$emit('showSubjective',this.NewDataForm)
@@ -80,16 +77,9 @@ export default {
         this.data.problemsAnswer[this.dataId]= dataFina
       },
       BackCard(){
-        this.data.remark[this.dataId] = this.remark
-        this.data.grade[this.dataId] = this.gradevalue
-        this.gradevalue = 7
-        this.remark = ''
         console.log(this.data)
         this.isshowCard = true
       },
-      getInputValue(){
-        console.log(this.remark)
-      }
     },
     props:{
       data:{
