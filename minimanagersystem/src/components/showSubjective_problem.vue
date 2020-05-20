@@ -77,6 +77,10 @@ export default {
         this.data.problemsAnswer[this.dataId]= dataFina
       },
       BackCard(){
+        for(let i = 0;i<this.data.problemsAnswer.length;i++)
+        {
+          this.data.problemsAnswer[i] = this.data.problemsAnswer[i].replace(/\<.*?\>/g,'')
+        }
         console.log(this.data)
         this.isshowCard = true
       },
