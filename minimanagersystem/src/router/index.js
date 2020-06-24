@@ -1,12 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import index from '../views/index.vue'
 import login from '../views/login.vue'
-import managerSystemIndex from '../views/managerSystemIndex.vue'
-import accesslog from '../views/manager/accesslog.vue'
-import showallquestion from '../views/manager/showallquestion.vue'
-import showTable from '../views/manager/showTable.vue'
-import subjectiveItem from '../views/manager/subjectiveItem.vue'
 
 Vue.use(VueRouter)
 
@@ -17,30 +11,40 @@ const routes = [{
     },
     {
         path: '/Managerindex',
-        component: managerSystemIndex,
+        component: resolve => require([('@/views/managerSystemIndex')], resolve),
         children: [{
                 path: 'index',
                 name: 'index',
-                component: index
+                // component: resolve => require([('@/views/index')], resolve),
+                component: () =>
+                    import ('@/views/index')
             },
             {
                 path: 'accesslog',
                 name: 'accesslog',
-                component: accesslog
+                // component: resolve => require([('@/views/manager/accesslog')], resolve),
+                component: () =>
+                    import ('@/views/manager/accesslog')
             },
             {
                 path: 'showallquestion',
-                component: showallquestion,
+                // component: resolve => require([('@/views/manager/showallquestion')], resolve),
+                component: () =>
+                    import ('@/views/manager/showallquestion')
             },
             {
                 path: 'showTable',
                 name: 'showTable',
-                component: showTable
+                // component: resolve => require([('@/views/manager/showTable')], resolve),
+                component: () =>
+                    import ('@/views/manager/showTable')
             },
             {
                 path: 'subjectiveItem',
                 name: 'subjectiveItem',
-                component: subjectiveItem
+                // component: resolve => require([('@/views/manager/subjectiveItem')], resolve),
+                component: () =>
+                    import ('@/views/manager/subjectiveItem')
             },
             {
                 path: '',
@@ -56,7 +60,8 @@ const routes = [{
 
 const router = new VueRouter({
     mode: 'history',
-    base: process.env.BASE_URL,
+    //base: process.env.BASE_URL,
+    // linkActiveClass:'' 设置点击的样式
     routes
 })
 

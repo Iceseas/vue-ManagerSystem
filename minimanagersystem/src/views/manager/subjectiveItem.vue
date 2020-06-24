@@ -56,7 +56,7 @@
                 :page-size="10"
                 layout="total, prev, pager, next"
                 :total="this.$store.state.total">
-                </el-pagination>
+                </el-pagination> 
             </div> 
         </el-col>
         </el-row>
@@ -69,7 +69,7 @@
                 </span>
             </div>
             <div class="showSubForm">
-                <showsubjectiveFrom v-if="this.$store.state.SubjectiveFormShow" v-on:showSubjective="getSubjectiveData" :data = "data" ></showsubjectiveFrom>
+                <showsubjectiveFrom v-if="this.$store.state.SubjectiveFormShow" v-on:showSubjective="getSubjectiveData"  :data = "data" ></showsubjectiveFrom>
             </div>
         </div>
         </div>

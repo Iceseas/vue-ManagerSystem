@@ -88,7 +88,7 @@ export default {
     props:{
       data:{
         required:true
-      }
+      },
     },
     mounted() {
       console.log(this.data.problemsAnswer)

@@ -72,8 +72,6 @@
                 </span>
             </div>
             <div class="updataForm">
-                <!-- <addsingleQuestionForm v-show="this.$store.state.addQuestionFormShow" v-on:getAddData="getAddData" ></addsingleQuestionForm>
-                <addApplicationFrom v-show="this.$store.state.addQuestionFormShow" v-on:getAddData="getAddData"></addApplicationFrom> -->
                 <addNewQuestion v-if="this.$store.state.addNewQuestionFromShow" v-on:getAddData="getAddData"></addNewQuestion>
                 <updataForm v-if="this.$store.state.updateQuestionFormShow" v-on:update="getUpdateData" :data = "data" ></updataForm>
             </div>

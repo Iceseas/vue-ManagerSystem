@@ -38,19 +38,17 @@
         </transition>
         <transition name="deleteloginimg">
         <span v-if="ishowimg" @click="handleShowLogin()" class="user_img">
-            <img :src="userimg">  
+            login 
         </span>
         </transition>
     </div>
 </template>
 
 <script>
-import userimg from '../assets/user.png'
 import axios from 'axios'
 export default {
     data(){
         return{
-            userimg:userimg,
             ishowimg:true,
             isshowlogin:false,
             isshowreg:false,

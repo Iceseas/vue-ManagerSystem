@@ -10,7 +10,7 @@
           <span>人员管理</span>
         </template>
           <el-menu-item index="1-1">
-            <router-link tag="span" class="WidthHeight100" to="/Managerindex/accesslog">
+            <router-link tag="span" replace class="WidthHeight100" to="/Managerindex/accesslog">
             访问记录
             </router-link>
           </el-menu-item>
@@ -21,12 +21,12 @@
           <span>题库管理</span>
         </template>
           <el-menu-item index="2-1" @click="showSubjective_Problem">
-            <router-link tag="span" class="WidthHeight100" to="/Managerindex/subjectiveItem">
+            <router-link tag="span" replace class="WidthHeight100" to="/Managerindex/subjectiveItem">
             评分中心
             </router-link>
           </el-menu-item>
           <el-menu-item index="2-2">
-            <router-link tag="span" class="WidthHeight100" to="/Managerindex/showallquestion">
+            <router-link tag="span" replace class="WidthHeight100" to="/Managerindex/showallquestion">
             查看题库
             </router-link>
           </el-menu-item>
