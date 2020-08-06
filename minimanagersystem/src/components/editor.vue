@@ -38,7 +38,6 @@ const toolbarOptions = [
   [{ font: [] }], // 字体种类
   [{ align: [] }], // 对齐方式
   ["clean"], // 清除文本格式
-
 ];
 
 import { quillEditor } from "vue-quill-editor";
@@ -50,17 +49,17 @@ export default {
   props: {
     /*编辑器的内容*/
     value: {
-      type: String
+      type: String,
     },
     /*图片大小*/
     maxSize: {
       type: Number,
-      default: 4000 //kb
-    }
+      default: 4000, //kb
+    },
   },
 
   components: {
-    quillEditor
+    quillEditor,
   },
 
   data() {
@@ -83,7 +82,7 @@ export default {
                 } else {
                   this.quill.format("image", false);
                 }
-              }
+              },
               // link: function(value) {
               //   if (value) {
               //     var href = prompt('请输入url');
@@ -92,14 +91,14 @@ export default {
               //     this.quill.format("link", false);
               //   }
               // },
-            }
-          }
-        }
+            },
+          },
+        },
       },
       serverUrl: "/v1/blog/imgUpload", // 这里写你要上传的图片服务器地址
       header: {
         // token: sessionStorage.token
-      } // 有的图片服务器要求请求头需要有token
+      }, // 有的图片服务器要求请求头需要有token
     };
   },
 
@@ -124,7 +123,7 @@ export default {
     uploadSuccess(res, file) {
       // res为图片服务器返回的数据
       // 获取富文本组件实例
-      console.log(file)
+      console.log(file);
       let quill = this.$refs.myQuillEditor.quill;
       // 如果上传成功
       if (res.code == 200) {
@@ -145,10 +144,10 @@ export default {
       // loading动画消失
       this.quillUpdateImg = false;
       this.$message.error("图片插入失败");
-    }
-  }
+    },
+  },
 };
-</script> 
+</script>
 
 <style>
 .editor {

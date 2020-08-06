@@ -1,42 +1,41 @@
 <template>
-<div class="manager_body">
-<el-container class="el-container">
-  <el-header><headerNav></headerNav></el-header>
-  <el-container>
-    <el-aside width="210px">
-      <asideNav></asideNav>
-    </el-aside>
-    <el-main>
-      <router-view></router-view>
-    </el-main>
-  </el-container>
-</el-container>
-</div>
+  <div class="manager_body">
+    <el-container class="el-container">
+      <el-header><headerNav></headerNav></el-header>
+      <el-container>
+        <el-aside width="210px">
+          <asideNav></asideNav>
+        </el-aside>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
 </template>
 
 <script>
-import headerNav from '../components/headernav'
-import asideNav from '../components/asideNav'
+import headerNav from "../components/headernav";
+import asideNav from "../components/asideNav";
 export default {
-  data(){
-    return{
-    }
+  data() {
+    return {
+      mainHeight: 0
+    };
   },
-  components:{
-    headerNav:headerNav,
-    asideNav:asideNav
+  components: {
+    headerNav: headerNav,
+    asideNav: asideNav,
   },
-  methods: {
-    
-  },
+  methods: {},
   mounted() {
-    this.$store.commit('getVuethis',(this)); 
+    this.$store.commit("getVuethis", this);
   },
-}
+};
 </script>
 
 <style>
-.clickdiv{
+.clickdiv {
   width: 50px;
   height: 50px;
   background: burlywood;
@@ -44,19 +43,16 @@ export default {
 html,
 body,
 .manager_body,
-.el-container{
+.el-container {
   height: 100%;
   width: 100%;
   min-width: 1000px;
 }
-.manager_body{
-  background:url(https://w.wallhaven.cc/full/ym/wallhaven-ym5d1x.jpg)no-repeat; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.manager_body {
+  background: #fff;
 }
-.el-header, .el-footer {
+.el-header,
+.el-footer {
   color: #333;
   text-align: center;
   line-height: 60px;
@@ -67,7 +63,7 @@ body,
   color: #333;
   text-align: center;
   line-height: 200px;
-  background: rgba(99, 110, 114,0.8);
+  background: rgba(99, 110, 114, 0.8);
 }
 
 .el-main {
@@ -89,5 +85,4 @@ body > .el-container {
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
 }
-
 </style>
