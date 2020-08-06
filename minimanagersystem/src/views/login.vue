@@ -38,7 +38,7 @@
         </transition>
         <transition name="deleteloginimg">
         <span v-if="ishowimg" @click="handleShowLogin()" class="user_img">
-            login 
+            <i class="el-icon-switch-button"></i>
         </span>
         </transition>
     </div>
@@ -178,6 +178,10 @@ export default {
     height: 200px;
     opacity: 0.5;
     cursor: pointer;
+    border-radius: 100%;
+    background: #eee;
+    text-align: center;
+    line-height: 260px;
 }
 .user_img:hover{
     opacity: 0.8;
@@ -188,6 +192,10 @@ export default {
     height: 100%;
     box-shadow: 0 0 10px #212121;
     border-radius: 100%;
+}
+.user_img>i{
+    font-size: 100px;
+    color: rgb(112, 110, 110);
 }
 .deleteloginimg-enter-active, .deleteloginimg-leave-active {
   transition: opacity 0.2s;
