@@ -40,6 +40,7 @@
           border
           :data="this.$store.state.tableData"
           row-key="index"
+          :height="tableHeight"
           stripe
           style="width: 100%"
           v-loading="this.$store.state.loading"
@@ -56,6 +57,7 @@
           <el-table-column align="center" label="操作" width="150">
             <template slot-scope="scope">
               <el-button
+                type="primary"
                 size="mini"
                 @click="handleEdit(scope.$index, scope.row)"
                 >编辑</el-button
@@ -115,6 +117,7 @@ import addNewQuestion from "../../components/addNewQuestion.vue";
 export default {
   data() {
     return {
+      tableHeight: 0,
       data: null,
       currentPage4: 1,
       input3: "",
@@ -125,6 +128,14 @@ export default {
     };
   },
   mounted() {
+    window.onresize = () => {
+      this.$nextTick(() => {
+        this.tableHeight = document.body.clientHeight - 240 + 'px';
+      });
+    };
+    this.$nextTick(() => {
+      this.tableHeight = document.body.clientHeight - 240 + 'px';
+    });
     let nowQuestionType = window.localStorage.getItem("questionType");
     if (nowQuestionType.substring(0, 6) == "single") {
       this.FormTitle = "添加选择题";

@@ -114,7 +114,6 @@ export default {
       })
         .then((res) => {
           if (res.data.error == 0) {
-            alert(res.data.msg);
             this.$store.commit("nowLoginUserCount", that.managerCount);
             localStorageSetData('nowLoginUserCount', that.managerCount)
             setCookie('token', that.managerCount)

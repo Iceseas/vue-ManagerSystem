@@ -1,22 +1,16 @@
 <template>
   <div class="asideNav_body">
     <el-menu default-active="2" class="el-menu-vertical-demo">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-s-custom"></i>
-          <span>人员管理</span>
-        </template>
-        <el-menu-item index="1-1">
-          <router-link
-            tag="span"
-            replace
-            class="WidthHeight100"
-            to="/Managerindex/accesslog"
-          >
-            访问记录
-          </router-link>
-        </el-menu-item>
-      </el-submenu>
+      <el-menu-item index="1">
+        <router-link
+          tag="span"
+          replace
+          class="WidthHeight100"
+          to="/Managerindex/index"
+        >
+        首页
+        </router-link>
+      </el-menu-item>
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-s-order"></i>
@@ -57,7 +51,17 @@
           <span>管理员</span>
         </template>
         <el-menu-item index="4-1">权限管理</el-menu-item>
-        <el-menu-item index="4-2">管理员列表</el-menu-item>
+        <el-menu-item index="4-2">用户管理</el-menu-item>
+        <el-menu-item index="4-3">
+          <router-link
+            tag="span"
+            replace
+            class="WidthHeight100"
+            to="/Managerindex/accesslog"
+          >
+            访问记录
+          </router-link>
+        </el-menu-item>
       </el-submenu>
     </el-menu>
   </div>

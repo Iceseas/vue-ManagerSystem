@@ -27,33 +27,42 @@
         </div>
       </el-col>
     </el-row>
-    <el-table
-      border
-      :data="this.$store.state.tableData"
-      row-key="index"
-      :stripe="true"
-      :height="subjectiveHeight"
-      style="width: 100%"
-      v-loading="this.$store.state.loading"
-    >
-      <el-table-column
-        align="center"
-        :key="col.prop"
-        :label="col.label"
-        :prop="col.prop"
-        v-for="col in this.$store.state.cols"
-        show-overflow-tooltip
-      >
-      </el-table-column>
-      <el-table-column align="center" label="操作" width="120">
-        <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-            >评分</el-button
+    <el-row>
+      <el-col :span="24">
+        <el-table
+          border
+          :data="this.$store.state.tableData"
+          row-key="index"
+          :stripe="true"
+          :height="subjectiveHeight"
+          style="width: 100%"
+          v-loading="this.$store.state.loading"
+        >
+          <el-table-column
+            align="center"
+            :key="col.prop"
+            :label="col.label"
+            :prop="col.prop"
+            v-for="col in this.$store.state.cols"
+            show-overflow-tooltip
           >
-        </template>
-      </el-table-column>
-    </el-table>
-        <div style="text-align:right;padding-right:20px" class="bg-purple">
+          </el-table-column>
+          <el-table-column align="center" label="操作" width="120">
+            <template slot-scope="scope">
+              <el-button
+                type="primary"
+                size="mini"
+                @click="handleEdit(scope.$index, scope.row)"
+                >评分</el-button
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-col>
+    </el-row>
+    <el-row class="showquestions_serch_add">
+      <el-col :span="24">
+        <div class="grid-content bg-purple">
           <el-pagination
             @current-change="handleCurrentChange"
             :current-page="currentPage4"
@@ -63,6 +72,8 @@
           >
           </el-pagination>
         </div>
+      </el-col>
+    </el-row>
     <div class="masking_out" v-if="this.$store.state.isFromShow">
       <div id="dialogBodybox" class="dialog-bodybox">
         <div class="dialog_body_header" @mousedown="mousemove">
@@ -102,14 +113,14 @@ export default {
     showsubjectiveFrom: showsubjectiveFrom,
   },
   mounted() {
-    this.freshTableData()
+    this.freshTableData();
     window.onresize = () => {
       this.$nextTick(() => {
-        this.subjectiveHeight = document.body.clientHeight - 240 + 'px';
+        this.subjectiveHeight = document.body.clientHeight - 220 + "px";
       });
     };
     this.$nextTick(() => {
-      this.subjectiveHeight = document.body.clientHeight - 240 + 'px';
+      this.subjectiveHeight = document.body.clientHeight - 220 + "px";
     });
   },
   methods: {
