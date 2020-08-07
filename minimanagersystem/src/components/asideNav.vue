@@ -1,6 +1,12 @@
 <template>
   <div class="asideNav_body">
-    <el-menu default-active="2" class="el-menu-vertical-demo">
+    <el-menu
+      default-active="2"
+      class="el-menu-vertical-demo"
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b"
+    >
       <el-menu-item index="1">
         <router-link
           tag="span"
@@ -8,7 +14,7 @@
           class="WidthHeight100"
           to="/Managerindex/index"
         >
-        首页
+          首页
         </router-link>
       </el-menu-item>
       <el-submenu index="2">
@@ -82,12 +88,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .asideNav_body {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 1);
   overflow: hidden;
+  box-shadow: 0 1px 8px #dee0e0;
+}
+>>> .el-menu {
+  height: 100% !important;
 }
 </style>

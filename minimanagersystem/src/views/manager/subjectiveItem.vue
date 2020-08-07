@@ -1,32 +1,49 @@
 <template>
   <div>
-    <el-row>
-      <el-col :span="8">
-        <div class="grid-content bg-purple-light">
-          <div class="serach_input">
-            <el-input
-              placeholder="请输入内容"
-              v-model="input3"
-              class="input-with-select"
-            >
-              <el-select v-model="select" slot="prepend" placeholder="请选择">
-                <el-option label="题型" value="1"></el-option>
-                <el-option label="章节" value="2"></el-option>
-                <el-option label="难度" value="3"></el-option>
-              </el-select>
-              <el-button slot="append" icon="el-icon-search"></el-button>
-            </el-input>
-          </div>
-        </div>
-      </el-col>
-      <el-col :span="16">
-        <div class="grid-content addData_box" style="text-align:right">
+    <div class="searchForm">
+      <div class="searchFormTopRow">
+        <div class="searchFormTopTitle">查询列表</div>
+        <div class="searchFormTopBtns">
+          <el-button type="primary">查询</el-button>
+          <el-button type="primary">重置</el-button>
           <el-button type="primary" @click="freshTableData()"
-            >刷新数据<i class="el-icon-refresh-left el-icon--right"></i
-          ></el-button>
+            >刷新数据</el-button
+          >
         </div>
-      </el-col>
-    </el-row>
+      </div>
+      <div class="searchFormBody">
+        <el-form>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="作业名称：" label-width="110px">
+                <el-input placeholder="请输入作业名称"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="学生姓名：" label-width="110px">
+                <el-input placeholder="请输入学生姓名"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="学号：" label-width="110px">
+                <el-input placeholder="请输入学号"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="专业班级：" label-width="110px">
+                <el-input placeholder="请输入专业班级"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="提交日期：" label-width="110px">
+                <el-date-picker type="date" placeholder="选择日期">
+                </el-date-picker>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form>
+      </div>
+    </div>
     <el-row>
       <el-col :span="24">
         <el-table
@@ -45,6 +62,7 @@
             :prop="col.prop"
             v-for="col in this.$store.state.cols"
             show-overflow-tooltip
+            label-class-name="table-column"
           >
           </el-table-column>
           <el-table-column align="center" label="操作" width="120">
@@ -62,7 +80,7 @@
     </el-row>
     <el-row class="showquestions_serch_add">
       <el-col :span="24">
-        <div class="grid-content bg-purple">
+        <div style="text-align:center" class="grid-content bg-purple">
           <el-pagination
             @current-change="handleCurrentChange"
             :current-page="currentPage4"
@@ -116,11 +134,11 @@ export default {
     this.freshTableData();
     window.onresize = () => {
       this.$nextTick(() => {
-        this.subjectiveHeight = document.body.clientHeight - 220 + "px";
+        this.subjectiveHeight = document.body.clientHeight - 380 + "px";
       });
     };
     this.$nextTick(() => {
-      this.subjectiveHeight = document.body.clientHeight - 220 + "px";
+      this.subjectiveHeight = document.body.clientHeight - 380 + "px";
     });
   },
   methods: {
@@ -212,5 +230,12 @@ export default {
   overflow-y: scroll;
   overflow-x: hidden;
   background: #fff;
+}
+>>> .el-date-editor {
+  width: 100% !important;
+}
+>>>.el-table__header tr,
+.el-table__header th {
+  background: #F5F7FA;
 }
 </style>
