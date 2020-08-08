@@ -134,7 +134,7 @@ export default {
 
 <style scoped>
 .login_body {
-  background: url(https://w.wallhaven.cc/full/ym/wallhaven-ym5d1x.jpg) no-repeat;
+  background: url(http://localhost:3000/static/img/background.jpg) no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

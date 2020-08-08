@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import headerNav from "../components/headernav";
-import asideNav from "../components/asideNav";
+import headerNav from "@/components/nav/headernav";
+import asideNav from "@/components/nav/asideNav";
 export default {
   data() {
     return {

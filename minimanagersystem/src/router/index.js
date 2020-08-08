@@ -1,13 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import login from "../views/login.vue";
-import subjectiveItem from "../views/manager/subjectiveItem.vue";
-import showTable from "../views/manager/showTable.vue";
-import showallquestion from "../views/manager/showallquestion.vue";
-import { getCookie } from "../../util/cookie";
-import accesslog from "../views/manager/accesslog.vue";
-import index from "../views/index.vue";
-import managerSystemIndex from "../views/managerSystemIndex.vue";
+import { getCookie } from "@/util/cookie";
 
 Vue.use(VueRouter);
 
@@ -15,12 +8,12 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: login,
+    component: () => import ('@/views/userlogin/login'),
   },
   {
     path: "/Managerindex",
     name: "Managerindex",
-    component: managerSystemIndex,
+    component: () => import ('@/views/home/managerSystemIndex'),
     meta: {
       checkLogined: true,
     },
@@ -28,7 +21,7 @@ const routes = [
       {
         path: "index",
         name: "index",
-        component: index,
+        component: () => import ('@/views/home/managerSystemIndex/index'),
         meta: {
           checkLogined: true,
         },
@@ -36,7 +29,7 @@ const routes = [
       {
         path: "accesslog",
         name: "accesslog",
-        component: accesslog,
+        component: () => import ('@/views/manager/accesslog'),
         meta: {
           checkLogined: true,
         },
@@ -44,7 +37,7 @@ const routes = [
       {
         path: "showallquestion",
         name: "showallquestion",
-        component: showallquestion,
+        component: () => import ('@/views/qsManage/otherQS/common/showallquestion'),
         meta: {
           checkLogined: true,
         },
@@ -52,7 +45,7 @@ const routes = [
       {
         path: "showTable",
         name: "showTable",
-        component: showTable,
+        component: () => import ('@/views/qsManage/otherQS/showTable'),
         meta: {
           checkLogined: true,
         },
@@ -60,7 +53,7 @@ const routes = [
       {
         path: "subjectiveItem",
         name: "subjectiveItem",
-        component: subjectiveItem,
+        component: () => import ('@/views/qsManage/subjective/subjectiveItem'),
         meta: {
           checkLogined: true,
         },
@@ -82,6 +75,7 @@ const router = new VueRouter({
   // linkActiveClass:'' 设置点击的样式
   routes,
 });
+// 页面检查cookie是否含有token
 router.beforeEach((to, from, next) => {
   if (to.meta.checkLogined) {
     if (getCookie("token") == null) {

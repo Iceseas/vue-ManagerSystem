@@ -83,8 +83,8 @@
 </template>
 
 <script>
-import { localStorageGetData, localStorageRemoveData } from "../../util/localStorageData";
-import { removeCookie } from '../../util/cookie'
+import { localStorageGetData, localStorageRemoveData } from "@/util/localStorageData";
+import { removeCookie } from '@/util/cookie'
 export default {
   data() {
     return {

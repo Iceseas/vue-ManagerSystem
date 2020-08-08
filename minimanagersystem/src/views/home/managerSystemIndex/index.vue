@@ -48,12 +48,12 @@
 </template>
 
 <script>
-import roseEchart from "../components/Nightingale-rose-chart.vue";
-import StackedAreaChar from "../components/Stacked-area-char.vue";
-import DynamicData from "../components/DynamicData.vue";
-import accessData from "../components/accessData.vue";
-import userAccessLog from "../components/userAccessLog.vue";
-import usermouthalive from "../components/usermouthalive.vue";
+import roseEchart from "@/views/home/managerSystemIndex/common/Nightingale-rose-chart.vue";
+import StackedAreaChar from "@/views/home/managerSystemIndex/common/Stacked-area-char.vue";
+import DynamicData from "@/views/home/managerSystemIndex/common/DynamicData.vue";
+import accessData from "@/views/home/managerSystemIndex/common/accessData.vue";
+import userAccessLog from "@/views/home/managerSystemIndex/common/userAccessLog.vue";
+import usermouthalive from "@/views/home/managerSystemIndex/common/usermouthalive.vue";
 
 export default {
   components: {

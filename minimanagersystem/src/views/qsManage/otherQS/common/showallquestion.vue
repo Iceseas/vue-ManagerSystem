@@ -3,7 +3,7 @@
     <div class="questionTab">
       <el-row :gutter="20">
         <el-col :span="3">
-          <span @click="showSingle('single_C1')">
+          <div @click="showSingle('single_C1')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -12,10 +12,10 @@
                 <span>第一单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showSingle('single_C2')">
+          <div @click="showSingle('single_C2')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -24,10 +24,10 @@
                 <span>第二单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showSingle('single_C3')">
+          <div @click="showSingle('single_C3')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -36,10 +36,10 @@
                 <span>第三单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showSingle('single_C4_5')">
+          <div @click="showSingle('single_C4_5')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -48,10 +48,10 @@
                 <span>第四-五单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showSingle('single_C6')">
+          <div @click="showSingle('single_C6')" class="marginB20"> 
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -60,10 +60,10 @@
                 <span>第六单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showSingle('single_C7')">
+          <div @click="showSingle('single_C7')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -72,10 +72,10 @@
                 <span>第七单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showSingle('single_C10')">
+          <div @click="showSingle('single_C10')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -84,10 +84,10 @@
                 <span>第十单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showSingle('single_C11')">
+          <div @click="showSingle('single_C11')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -96,12 +96,12 @@
                 <span>第十一单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
       </el-row>
       <el-row :gutter="20">
         <el-col :span="3">
-          <span @click="showvacancy('vacancy_C1')">
+          <div @click="showvacancy('vacancy_C1')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -110,10 +110,10 @@
                 <span>第一单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showvacancy('vacancy_C2')">
+          <div @click="showvacancy('vacancy_C2')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -122,10 +122,10 @@
                 <span>第二单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showvacancy('vacancy_C3')">
+          <div @click="showvacancy('vacancy_C3')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -134,10 +134,10 @@
                 <span>第三单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showvacancy('vacancy_C4_5')">
+          <div @click="showvacancy('vacancy_C4_5')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -146,10 +146,10 @@
                 <span>第四-五单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showvacancy('vacancy_C6')">
+          <div @click="showvacancy('vacancy_C6')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -158,10 +158,10 @@
                 <span>第六单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showvacancy('vacancy_C7')">
+          <div @click="showvacancy('vacancy_C7')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -170,10 +170,10 @@
                 <span>第七单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showvacancy('vacancy_C10')">
+          <div @click="showvacancy('vacancy_C10')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -182,10 +182,10 @@
                 <span>第十单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showvacancy('vacancy_C11')">
+          <div @click="showvacancy('vacancy_C11')" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -194,12 +194,12 @@
                 <span>第十一单元</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
       </el-row>
       <el-row :gutter="20">
         <el-col :span="3">
-          <span @click="showdecide()">
+          <div @click="showdecide()" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>判断</span>
@@ -208,10 +208,10 @@
                 <span>综合</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showApplicationQuestion()">
+          <div @click="showApplicationQuestion()" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>应用</span>
@@ -220,10 +220,10 @@
                 <span>大题</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
         <el-col :span="3">
-          <span @click="showAllsingleQuestion()">
+          <div @click="showAllsingleQuestion()" class="marginB20">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -232,7 +232,7 @@
                 <span>题库</span>
               </div>
             </el-card>
-          </span>
+          </div>
         </el-col>
       </el-row>
     </div>
@@ -307,56 +307,6 @@ export default {
   width: 100%;
   height: 40px;
 }
-.el-table__header tr,
-.el-table__header th {
-  padding: 0;
-  height: 40px;
-  line-height: 40px;
-}
-.el-table__body tr,
-.el-table__body td {
-  padding: 0;
-  height: 40px;
-  line-height: 40px;
-}
-.el-row {
-  margin-bottom: 20px;
-}
-.el-col {
-  border-radius: 4px;
-}
-.bg-purple-dark {
-  background: #99a9bf;
-}
-.bg-purple {
-  background: #d3dce6;
-}
-.bg-purple-light {
-  background: #e5e9f2;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
-.row-bg {
-  padding: 10px 0;
-  background-color: #f9fafc;
-}
-.showquestions_serch_add {
-  margin-top: 20px;
-}
-.search_box {
-  height: 40px;
-}
-.el-select .el-input {
-  width: 130px;
-}
-.input-with-select .el-input-group__prepend {
-  background-color: #fff;
-}
-.el-pagination {
-  height: 30px;
-}
 .questionTab {
   box-sizing: border-box;
   text-align: center;
@@ -414,5 +364,8 @@ export default {
   left: 10px;
   transform: translateY(-50%);
   font-size: 16px;
+}
+.marginB20{
+  margin-bottom: 20px;
 }
 </style>
