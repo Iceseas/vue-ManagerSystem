@@ -63,7 +63,7 @@
 		<el-row class="showquestions_serch_add">
 			<el-col :span="24">
 				<div style="text-align:center" class="grid-content bg-purple">
-					<el-pagination @current-change="handleCurrentChange" :current-page="currentPage4" :page-size="20" layout="total, prev, pager, next"
+					<el-pagination @current-change="handleCurrentChange" :current-page="currentPage4" :page-size="10" layout="total, prev, pager, next, jumper"
 					 :total="this.$store.state.total">
 					</el-pagination>
 				</div>

@@ -60,7 +60,7 @@
 		<el-row class="showquestions_serch_add">
 			<el-col :span="24">
 				<div class="grid-content bg-purple">
-					<el-pagination @current-change="handleCurrentChange" :current-page="currentPage4" :page-size="20" layout="total, prev, pager, next"
+					<el-pagination @current-change="handleCurrentChange" :current-page="query.pageCurrent"  :page-size="query.pageSize" layout="total, prev, pager, next, jumper"
 					 :total="this.$store.state.total">
 					</el-pagination>
 				</div>
@@ -92,7 +92,9 @@
 				// 查询条件
 				query:{
 				  difficulty:'',
-				  chapter: ''
+				  chapter: '',
+				  pageSize: 10,
+				  pageCurrent: 1
 				},
 				tableHeight: 0,
 				data: null,
@@ -205,28 +207,8 @@
 			},
 			handleCurrentChange(val) {
 				this.$store.commit("changePageInfo", val);
-				switch (this.$store.state.nowQuestionType) {
-					case "single_C1":
-						this.$store.dispatch("get_PageInfo_AJAX");
-						this.$store.dispatch("get_listData_AJAX");
-						break;
-					case "decide":
-						this.$store.dispatch("get_PageInfo_AJAX");
-						this.$store.dispatch("get_listData_AJAX");
-						break;
-					case "single_C2":
-						this.$store.dispatch("get_PageInfo_AJAX");
-						this.$store.dispatch("get_listData_AJAX");
-						break;
-					case "vacancy_C1":
-						this.$store.dispatch("get_PageInfo_AJAX");
-						this.$store.dispatch("get_listData_AJAX");
-						break;
-					case "single_models":
-						this.$store.dispatch("get_PageInfo_AJAX");
-						this.$store.dispatch("get_listData_AJAX");
-						break;
-				}
+				this.$store.dispatch("get_PageInfo_AJAX");
+				this.$store.dispatch("get_listData_AJAX");
 			},
 			mousemove(event) {
 				let dialogBox = document.getElementById("dialogBodybox");
