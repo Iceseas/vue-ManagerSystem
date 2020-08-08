@@ -38,7 +38,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .accessData_body,
 .accessData_ul {
   width: 100%;

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.392df5e28fd5ea15f1cc575921952072.js"
+  "precache-manifest.847fc8bd34b8876fee3ab3510f00dde7.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "minimanagersystem"});

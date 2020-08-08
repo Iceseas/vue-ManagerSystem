@@ -98,7 +98,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .StackedAreaChar {
   width: 100%;
   height: 100%;

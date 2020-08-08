@@ -78,7 +78,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .roseEchars {
   width: 100%;
   height: 100%;

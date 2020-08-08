@@ -149,7 +149,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .editor {
   line-height: normal !important;
   border: 1px solid #000;

@@ -295,7 +295,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .showQuestions {
   height: auto;
   width: 100%;

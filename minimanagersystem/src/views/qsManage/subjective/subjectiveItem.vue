@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="Icontainer">
+		<div class="Icontainer" style="display: flex;flex-direction: column;">
 			<div class="IcontainerTopRow">
 				<div class="IcontainerTopTitle">查询列表</div>
 				<div class="IcontainerTopBtns">
