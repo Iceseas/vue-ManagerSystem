@@ -338,9 +338,11 @@ export default {
   margin-bottom: 20px;
 }
 >>>.el-card{
-  background: #F5F7FA;
+  background: #149c58;
   border-radius: 20px;
   font-weight: 600;
+  color: #fff;
+  box-shadow: 0 2px 7px rgba(0,0,0,.35);
 }
 >>>.el-card:hover{
   transform: scale(1.1);

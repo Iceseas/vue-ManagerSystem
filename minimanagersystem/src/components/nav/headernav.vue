@@ -7,27 +7,35 @@
           欢迎您:{{ welcomeManager }} 老师
         </li>
         <li class="headernav_ShowUserMsg_li">
-          <i class="el-icon-s-custom"></i>
+          <Button type="primary" shape="circle" icon="md-person" @click="showNowUser"></Button>
         </li>
         <li class="headernav_ShowUserMsg_li">
-          <i class="el-icon-message"></i>
+          <Button type="primary" shape="circle" icon="ios-text"></Button>
         </li>
         <li class="headernav_ShowUserMsg_li">
-          <Poptip
-            width="400px"
-            word-wrap
-            v-model="delPopover"
-            title="您确定退出吗?"
-          >
-          <div class="api" slot="content">
-            <Button @click="onCancel" style="margin-right:10px">取消</Button>
-            <Button @click="logOutUser" type="primary">退出</Button>
-          </div>
-            <Button>退出</Button>
-          </Poptip>
+          <Button
+            type="primary"
+            shape="circle"
+            icon="md-log-out"
+            @click="openLogOutModal"
+          ></Button>
         </li>
       </ul>
     </div>
+    <!-- 当前用户显示信息 -->
+    <Modal v-model="showUserMsgModal" width="360">
+        <div slot="header" style="color:#f60;text-align:center">
+          <p>当前用户</p>
+        </div>
+        <div style="text-align:center">
+            <Avatar src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1674760321,2881373110&fm=26&gp=0.jpg" icon="ios-person" size="large" />
+            <p>{{ welcomeManager }}</p>
+            <p>老师</p>
+        </div>
+        <div slot="footer">
+            <Button type="primary" size="large" long @click="closeShowUser">确定</Button>
+        </div>
+    </Modal>
   </div>
 </template>
 
@@ -43,21 +51,35 @@ export default {
       activeIndex: "1",
       activeIndex2: "1",
       welcomeManager: "",
-      delPopover: false,
+      showUserMsgModal: false,
     };
   },
   mounted() {
     this.welcomeManager = localStorageGetData("nowLoginUserCount");
   },
   methods: {
-    logOutUser() {
-      localStorageRemoveData("nowLoginUserCount");
-      removeCookie("token");
-      this.$router.replace("/login");
+    // 退出
+    openLogOutModal() {
+      this.$Modal.confirm({
+        title: "退出",
+        content: "<p>确定要退出吗</p>",
+        onOk: () => {
+          localStorageRemoveData("nowLoginUserCount");
+          removeCookie("token");
+          this.$router.replace("/login");
+          this.$Message.info("退出成功");
+        },
+        onCancel: () => {
+        },
+      });
     },
-    onCancel() {
-      this.delPopover = false;
+    // 显示当前用户信息
+    showNowUser() {
+      this.showUserMsgModal = true;
     },
+    closeShowUser() {
+      this.showUserMsgModal = false;
+    }
   },
 };
 </script>
@@ -134,7 +156,6 @@ export default {
 .headernav_ShowUserMsg_li {
   height: 100%;
   color: #fff;
-  float: left;
   text-align: center;
   box-sizing: border-box;
   font-size: 14px;
