@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <Layout>
-      <Header>
+      <Header :style="{ borderBottom: '1px solid #17233d' }">
         <headerNav></headerNav>
       </Header>
       <Layout>
