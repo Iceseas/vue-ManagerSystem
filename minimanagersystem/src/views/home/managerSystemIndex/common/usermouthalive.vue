@@ -37,6 +37,8 @@ export default {};
   flex-grow: 1;
   line-height: 100px;
   list-style: none;
+  text-align: center;
+  font-size: 14px;
 }
 .usermouthalive_Num {
   font-size: 40px;

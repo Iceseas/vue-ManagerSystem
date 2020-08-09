@@ -1,16 +1,27 @@
 <template>
-  <div class="manager_body">
-    <el-container class="el-container">
-      <el-header><headerNav></headerNav></el-header>
-      <el-container>
-        <el-aside width="210px">
+  <div class="layout">
+    <Layout>
+      <Header>
+        <headerNav></headerNav>
+      </Header>
+      <Layout>
+        <Sider hide-trigger :style="{ background: '#fff' }">
           <asideNav></asideNav>
-        </el-aside>
-        <el-main>
-          <router-view></router-view>
-        </el-main>
-      </el-container>
-    </el-container>
+        </Sider>
+        <Layout :style="{ padding: '0 24px 24px' }">
+          <Breadcrumb :style="{ margin: '24px 0' }">
+            <BreadcrumbItem>Home</BreadcrumbItem>
+            <BreadcrumbItem>Components</BreadcrumbItem>
+            <BreadcrumbItem>Layout</BreadcrumbItem>
+          </Breadcrumb>
+          <Content
+            :style="{ minHeight: '280px' }"
+          >
+            <router-view></router-view>
+          </Content>
+        </Layout>
+      </Layout>
+    </Layout>
   </div>
 </template>
 
@@ -20,7 +31,7 @@ import asideNav from "@/components/nav/asideNav";
 export default {
   data() {
     return {
-      mainHeight: 0
+      mainHeight: 0,
     };
   },
   components: {
@@ -40,48 +51,24 @@ export default {
   height: 50px;
   background: burlywood;
 }
-html,
-body,
-.manager_body,
-.el-container {
-  height: 100%;
-  width: 100%;
-  min-width: 1000px;
+.layout {
+  background: #f5f7f9;
+  position: relative;
+  overflow: hidden;
 }
-.manager_body {
-  background: #fff;
+.layout-logo {
+  width: 100px;
+  height: 30px;
+  background: #5b6270;
+  border-radius: 3px;
+  float: left;
+  position: relative;
+  top: 15px;
+  left: 20px;
 }
-.el-header,
-.el-footer {
-  color: #333;
-  text-align: center;
-  line-height: 60px;
-  box-shadow: 0 0 10px #fff;
-}
-
-.el-aside {
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-  background: rgba(99, 110, 114, 0.8);
-}
-
-.el-main {
-  background-color: rgb(253, 252, 252);
-  color: #333;
-  overflow: hidden !important;
-}
-
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
+.layout-nav {
+  width: 420px;
+  margin: 0 auto;
+  margin-right: 20px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="index_body">
+  <div :style="`height:${indexHeight}`" class="index_body">
     <el-row>
       <el-col :span="24">
         <div class="grid-content bg-purple index-header">
@@ -25,14 +25,6 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="16"
-        ><div class="grid-content bg-purple index-news"></div
-      ></el-col>
-      <el-col :span="8"
-        ><div class="grid-content bg-purple-light index-news"></div
-      ></el-col>
-    </el-row>
-    <el-row>
       <el-col :span="8">
         <div class="grid-content bg-purple-light">
           <usermouthalive></usermouthalive>
@@ -56,6 +48,11 @@ import userAccessLog from "@/views/home/managerSystemIndex/common/userAccessLog.
 import usermouthalive from "@/views/home/managerSystemIndex/common/usermouthalive.vue";
 
 export default {
+  data() {
+    return{
+      indexHeight: 0
+    }
+  },
   components: {
     roseEchart: roseEchart,
     StackedAreaChar: StackedAreaChar,
@@ -64,14 +61,22 @@ export default {
     userAccessLog: userAccessLog,
     usermouthalive: usermouthalive,
   },
-  mounted() {},
+  mounted() {
+    window.onresize = () => {
+      this.$nextTick(() => {
+        this.indexHeight = document.body.clientHeight - 155 + "px";
+      });
+    };
+    this.$nextTick(() => {
+      this.indexHeight = document.body.clientHeight - 155 + "px";
+    });
+  },
 };
 </script>
 
 <style scoped>
 .index_body {
   width: 100%;
-  height: 100%;
 }
 .el-row {
   margin-bottom: 20px;
@@ -103,14 +108,7 @@ export default {
 }
 .index-echarts {
   height: 300px;
+  width: 100%;
   background: #99a9bf;
-}
-.index-news {
-  height: 200px;
-}
-.index-access {
-  height: 200px;
-  margin-bottom: 60px;
-  overflow: scroll;
 }
 </style>

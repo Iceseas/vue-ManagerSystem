@@ -1,81 +1,78 @@
 <template>
-	<div class="asideNav_body">
-
-		<el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff"
-		 active-text-color="#ffd04b">
-			<el-menu-item index="1">
-				<router-link tag="span" replace class="WidthHeight100" to="/Managerindex/index">
-					首页
-				</router-link>
-			</el-menu-item>
-			<el-submenu index="2">
-				<template slot="title">
-					<i class="el-icon-s-order"></i>
-					<span>题库管理</span>
-				</template>
-					<el-menu-item index="2-1" @click="showSubjective_Problem">
-						<router-link tag="span" replace class="WidthHeight100" to="/Managerindex/subjectiveItem">
-							主观题
-						</router-link>
-					</el-menu-item>
-					<el-menu-item index="2-2">
-						<router-link tag="span" replace class="WidthHeight100" to="/Managerindex/showallquestion">
-							其他题型
-						</router-link>
-					</el-menu-item>
-			</el-submenu>
-			<el-submenu index="3">
-				<template slot="title">
-					<i class="el-icon-s-tools"></i>
-					<span>系统设置</span>
-				</template>
-				<el-menu-item index="3-1">基本设置</el-menu-item>
-				<el-menu-item index="3-2">系统日志</el-menu-item>
-			</el-submenu>
-			<el-submenu index="4">
-				<template slot="title">
-					<i class="el-icon-menu"></i>
-					<span>管理员</span>
-				</template>
-				<el-menu-item index="4-1">权限管理</el-menu-item>
-				<el-menu-item index="4-2">用户管理</el-menu-item>
-				<el-menu-item index="4-3">
-					<router-link tag="span" replace class="WidthHeight100" to="/Managerindex/accesslog">
-						访问记录
-					</router-link>
-				</el-menu-item>
-			</el-submenu>
-		</el-menu>
-
-	</div>
+  <div class="asideNav_body">
+    <Menu theme="light" :active-name="activeName">
+      <MenuGroup  title="首页" name="1">
+        <MenuItem name="index" to="/Managerindex/index">
+            首页
+        </MenuItem>
+      </MenuGroup>
+      <MenuGroup title="题库管理">
+        <MenuItem name="subjectiveItem" to="/Managerindex/subjectiveItem">
+          <Icon type="md-heart" />
+            主观题
+        </MenuItem>
+        <MenuItem name="showallquestion" to="/Managerindex/showallquestion">
+          <Icon type="md-leaf" />
+            其他题型
+        </MenuItem>
+      </MenuGroup>
+      <MenuGroup title="系统设置">
+        <MenuItem name="4">
+          <Icon type="md-heart" />
+          基本设置
+        </MenuItem>
+        <MenuItem name="5">
+          <Icon type="md-leaf" />
+          系统日志
+        </MenuItem>
+      </MenuGroup>
+      <MenuGroup title="管理员">
+        <MenuItem name="6">
+          <Icon type="md-heart" />
+          权限管理
+        </MenuItem>
+        <MenuItem name="7">
+          <Icon type="md-leaf" />
+          用户管理
+        </MenuItem>
+        <MenuItem name="accesslog" to="/Managerindex/accesslog">
+          <Icon type="md-leaf" />
+            访问记录
+        </MenuItem>
+      </MenuGroup>
+    </Menu>
+  </div>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {};
-		},
-		methods: {
-			showSubjective_Problem() {
-				this.$store.commit("changeNowQuestionType", "subjective_publish");
-				this.$store.dispatch("get_PageInfo_AJAX");
-				this.$store.dispatch("get_listData_AJAX");
-			},
-		},
-	};
+export default {
+  data() {
+    return {
+      activeName: ''
+    };
+  },
+  mounted() {
+    this.activeName = this.$route.name
+  },
+  methods: {
+    showSubjective_Problem() {
+      this.$store.commit("changeNowQuestionType", "subjective_publish");
+      this.$store.dispatch("get_PageInfo_AJAX");
+      this.$store.dispatch("get_listData_AJAX");
+    },
+  },
+};
 </script>
 
 <style scoped>
-	.asideNav_body {
-		width: 100%;
-		height: 100%;
-		box-sizing: border-box;
-		background: rgba(255, 255, 255, 1);
-		overflow: hidden;
-		box-shadow: 0 1px 8px #dee0e0;
-	}
-
-	>>>.el-menu {
-		height: 100% !important;
-	}
+.asideNav_body {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  overflow: hidden;
+}
+>>>.ivu-menu{
+  height: 100%;
+}
 </style>

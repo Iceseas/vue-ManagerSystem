@@ -115,11 +115,11 @@
 			this.freshTableData();
 			window.onresize = () => {
 				this.$nextTick(() => {
-					this.subjectiveHeight = document.body.clientHeight - 390 + "px";
+					this.subjectiveHeight = document.body.clientHeight - 455 + "px";
 				});
 			};
 			this.$nextTick(() => {
-				this.subjectiveHeight = document.body.clientHeight - 390 + "px";
+				this.subjectiveHeight = document.body.clientHeight - 455 + "px";
 			});
 		},
 		methods: {
@@ -224,4 +224,48 @@
 	.el-table__header th {
 		background: #F5F7FA;
 	}
+	.dialog-bodybox {
+  width: 700px;
+  min-height: 400px;
+  background: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #eee;
+  border-radius: 6px;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 99;
+}
+.dialog_body_header {
+  width: 100%;
+  height: 40px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  cursor: move;
+  position: relative;
+}
+.dialog_close {
+  font-size: 16px;
+}
+.dialog_close_span {
+  line-height: 25px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.dialog_close_title {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 16px;
+}
 </style>

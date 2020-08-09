@@ -2,55 +2,6 @@
   <div class="headernav_body">
     <div class="headernav_title">ManagerSystem</div>
     <div class="headernav_menu">
-      <ul class="headernav_menu_ul">
-        <li class="headernav_menu_ul_li">
-          <el-dropdown class="el-dropdown">
-            <span class="el-dropdown-link">
-              菜单1<i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="a">黄金糕</el-dropdown-item>
-              <el-dropdown-item command="b">狮子头</el-dropdown-item>
-              <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </li>
-        <li class="headernav_menu_ul_li">
-          <el-dropdown class="el-dropdown">
-            <span class="el-dropdown-link">
-              菜单2<i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="a">黄金糕</el-dropdown-item>
-              <el-dropdown-item command="b">狮子头</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </li>
-        <li class="headernav_menu_ul_li">
-          <el-dropdown class="el-dropdown">
-            <span class="el-dropdown-link">
-              菜单3<i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="a">黄金糕</el-dropdown-item>
-              <el-dropdown-item command="b">狮子头</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </li>
-        <li class="headernav_menu_ul_li">
-          <el-dropdown class="el-dropdown">
-            <span class="el-dropdown-link">
-              菜单4<i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="a">黄金糕</el-dropdown-item>
-              <el-dropdown-item command="b">狮子头</el-dropdown-item>
-              <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
-              <el-dropdown-item command="d">双皮奶</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </li>
-      </ul>
       <ul class="headernav_ShowUserMsg_ul">
         <li class="headernav_ShowUserMsg_li">
           欢迎您:{{ welcomeManager }} 老师
@@ -62,20 +13,18 @@
           <i class="el-icon-message"></i>
         </li>
         <li class="headernav_ShowUserMsg_li">
-          <el-popover
-            placement="top"
+          <Poptip
+            width="400px"
+            word-wrap
             v-model="delPopover"
-            width="200">
-            <p>确定退出吗？</p>
-            <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="onCancel" >取消</el-button>
-              <el-button type="primary" @click="logOutUser">退出</el-button>
-            </div>
-            <el-button
-              slot="reference"
-              icon="el-icon-download exiticon"
-              plain/>
-          </el-popover>
+            title="您确定退出吗?"
+          >
+          <div class="api" slot="content">
+            <Button @click="onCancel" style="margin-right:10px">取消</Button>
+            <Button @click="logOutUser" type="primary">退出</Button>
+          </div>
+            <Button>退出</Button>
+          </Poptip>
         </li>
       </ul>
     </div>
@@ -83,15 +32,18 @@
 </template>
 
 <script>
-import { localStorageGetData, localStorageRemoveData } from "@/util/localStorageData";
-import { removeCookie } from '@/util/cookie'
+import {
+  localStorageGetData,
+  localStorageRemoveData,
+} from "@/util/localStorageData";
+import { removeCookie } from "@/util/cookie";
 export default {
   data() {
     return {
       activeIndex: "1",
       activeIndex2: "1",
       welcomeManager: "",
-      delPopover: false
+      delPopover: false,
     };
   },
   mounted() {
@@ -99,13 +51,13 @@ export default {
   },
   methods: {
     logOutUser() {
-      localStorageRemoveData("nowLoginUserCount")
-      removeCookie('token')
-      this.$router.replace('/login')
+      localStorageRemoveData("nowLoginUserCount");
+      removeCookie("token");
+      this.$router.replace("/login");
     },
     onCancel() {
-      this.delPopover = false
-    }
+      this.delPopover = false;
+    },
   },
 };
 </script>
@@ -137,6 +89,7 @@ export default {
 }
 .headernav_menu_ul_li {
   float: left;
+  margin-right: 20px;
   padding: 0 10px;
   width: 100px;
   min-width: 90px;
@@ -155,14 +108,12 @@ export default {
   font-family: Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB,
     "\5B8B\4F53", sans-serif;
   font-weight: 600;
-  background-color: rgba(31, 35, 34, 1);
   min-width: 200px;
   color: #f7f1e3;
 }
 
 .headernav_menu {
   text-align: left;
-  background-color: rgba(31, 35, 34, 1);
   flex-grow: 1;
   padding-left: 100px;
   box-sizing: border-box;

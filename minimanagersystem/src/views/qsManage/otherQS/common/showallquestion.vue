@@ -1,9 +1,9 @@
 <template>
-  <div class="showQuestions">
+  <div :style="`height:${listHeight}`" class="showQuestions">
     <div class="questionTab">
       <el-row :gutter="20">
         <el-col :span="3">
-          <div @click="showSingle('single_C1')" class="marginB20">
+          <div @click="showSingle('single_C1')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -15,7 +15,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showSingle('single_C2')" class="marginB20">
+          <div @click="showSingle('single_C2')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -27,7 +27,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showSingle('single_C3')" class="marginB20">
+          <div @click="showSingle('single_C3')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -39,7 +39,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showSingle('single_C4_5')" class="marginB20">
+          <div @click="showSingle('single_C4_5')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -51,7 +51,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showSingle('single_C6')" class="marginB20"> 
+          <div @click="showSingle('single_C6')" class="cardBody"> 
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -63,7 +63,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showSingle('single_C7')" class="marginB20">
+          <div @click="showSingle('single_C7')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -75,7 +75,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showSingle('single_C10')" class="marginB20">
+          <div @click="showSingle('single_C10')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -87,7 +87,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showSingle('single_C11')" class="marginB20">
+          <div @click="showSingle('single_C11')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -101,7 +101,7 @@
       </el-row>
       <el-row :gutter="20">
         <el-col :span="3">
-          <div @click="showvacancy('vacancy_C1')" class="marginB20">
+          <div @click="showvacancy('vacancy_C1')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -113,7 +113,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showvacancy('vacancy_C2')" class="marginB20">
+          <div @click="showvacancy('vacancy_C2')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -125,7 +125,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showvacancy('vacancy_C3')" class="marginB20">
+          <div @click="showvacancy('vacancy_C3')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -137,7 +137,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showvacancy('vacancy_C4_5')" class="marginB20">
+          <div @click="showvacancy('vacancy_C4_5')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -149,7 +149,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showvacancy('vacancy_C6')" class="marginB20">
+          <div @click="showvacancy('vacancy_C6')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -161,7 +161,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showvacancy('vacancy_C7')" class="marginB20">
+          <div @click="showvacancy('vacancy_C7')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -173,7 +173,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showvacancy('vacancy_C10')" class="marginB20">
+          <div @click="showvacancy('vacancy_C10')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -185,7 +185,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showvacancy('vacancy_C11')" class="marginB20">
+          <div @click="showvacancy('vacancy_C11')" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>填空</span>
@@ -199,7 +199,7 @@
       </el-row>
       <el-row :gutter="20">
         <el-col :span="3">
-          <div @click="showdecide()" class="marginB20">
+          <div @click="showdecide()" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>判断</span>
@@ -211,7 +211,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showApplicationQuestion()" class="marginB20">
+          <div @click="showApplicationQuestion()" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>应用</span>
@@ -223,7 +223,7 @@
           </div>
         </el-col>
         <el-col :span="3">
-          <div @click="showAllsingleQuestion()" class="marginB20">
+          <div @click="showAllsingleQuestion()" class="cardBody">
             <el-card :body-style="{ padding: '0px', cursor: 'pointer' }" shadow="always">
               <div class="cardtitle">
                 <span>单选</span>
@@ -243,6 +243,7 @@
 export default {
   data() {
     return {
+      listHeight: 0,
       showQuestionData: false,
     };
   },
@@ -288,7 +289,16 @@ export default {
       this.$router.push("showTable");
     },
   },
-  mounted() {},
+  mounted() {
+    window.onresize = () => {
+      this.$nextTick(() => {
+        this.listHeight = document.body.clientHeight - 155 + "px";
+      });
+    };
+    this.$nextTick(() => {
+      this.listHeight = document.body.clientHeight - 155 + "px";
+    });
+  },
   destroyed() {
     this.tableData = [];
   },
@@ -297,7 +307,10 @@ export default {
 
 <style scoped>
 .showQuestions {
-  height: auto;
+  height: 100%;
+  box-shadow: 0 1px 8px #ebeef5;
+  background: #d3dce6;
+  border-radius: 20px;
   width: 100%;
 }
 .el-input-group {
@@ -321,51 +334,15 @@ export default {
   height: 80px;
   line-height: 80px;
 }
-.dialog-bodybox {
-  width: 700px;
-  min-height: 400px;
-  background: #fff;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid #eee;
-  border-radius: 6px;
-  box-sizing: border-box;
-  overflow: hidden;
-  z-index: 99;
-}
-.dialog_body_header {
-  width: 100%;
-  height: 40px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  cursor: move;
-  position: relative;
-}
-.dialog_close {
-  font-size: 16px;
-}
-.dialog_close_span {
-  line-height: 25px;
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.dialog_close_title {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  font-size: 16px;
-}
-.marginB20{
+.cardBody{
   margin-bottom: 20px;
+}
+>>>.el-card{
+  background: #F5F7FA;
+  border-radius: 20px;
+  font-weight: 600;
+}
+>>>.el-card:hover{
+  transform: scale(1.1);
 }
 </style>

@@ -50,6 +50,8 @@ export default {};
 .accessData_li {
   flex-grow: 1;
   list-style: none;
+  text-align: center;
+  font-size: 14px;
 }
 .accessData_Num {
   font-size: 40px;

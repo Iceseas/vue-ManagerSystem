@@ -2,13 +2,7 @@
   <div class="userAccessLog_body">
     <span class="userAccessLog_span">访问用户列表</span>
     <el-table
-      :data="
-        tableData.filter(
-          (data) =>
-            !search || data.name.toLowerCase().includes(search.toLowerCase())
-        )
-      "
-      style="width: 100%"
+      :data="tableData"
     >
       <el-table-column label="" type="index"> </el-table-column>
       <el-table-column label="头像" prop="userimg">
@@ -16,7 +10,7 @@
           <el-avatar :src="scope.row.userimg"></el-avatar>
         </template>
       </el-table-column>
-      <el-table-column label="昵称" prop="niceName"> </el-table-column>
+      <el-table-column width="80" label="昵称" prop="niceName"> </el-table-column>
       <el-table-column label="性别" prop="gender"> </el-table-column>
       <el-table-column label="城市" prop="city"> </el-table-column>
       <el-table-column label="时间" prop="Data"> </el-table-column>
@@ -89,7 +83,6 @@ export default {
 <style scoped>
 .userAccessLog_body {
   width: 100%;
-  height: 100%;
 }
 .userAccessLog_span {
   display: block;
@@ -101,17 +94,5 @@ export default {
   text-align: left;
   background: #fff;
   border-bottom: 1px solid #eee;
-}
-.el-table__header tr,
-.el-table__header th {
-  padding: 0;
-  height: 40px;
-  line-height: 40px;
-}
-.el-table__body tr,
-.el-table__body td {
-  padding: 0;
-  height: 30px;
-  line-height: 30px;
 }
 </style>

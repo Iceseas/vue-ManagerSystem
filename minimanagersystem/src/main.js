@@ -9,6 +9,9 @@ import 'element-ui/lib/theme-chalk/display.css';
 import echarts from 'echarts'
 import '@/styles/Layout.css'
 
+import ViewUI from 'view-design';
+import 'view-design/dist/styles/iview.css';
+
 
 import './registerServiceWorker'
 import router from './router'
@@ -18,6 +21,7 @@ import App from './App.vue'
 
 Vue.prototype.$echarts = echarts
 Vue.use(ElementUI);
+Vue.use(ViewUI);
 Vue.config.productionTip = false
 
 new Vue({
