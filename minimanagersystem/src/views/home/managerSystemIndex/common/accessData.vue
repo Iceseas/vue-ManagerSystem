@@ -46,12 +46,24 @@ export default {};
 }
 .accessData_ul {
   display: flex;
+  box-sizing: border-box;
 }
 .accessData_li {
   flex-grow: 1;
   list-style: none;
   text-align: center;
   font-size: 14px;
+  background: #19be6b;
+  color: #fff;
+  margin-right: 20px;
+  border-radius: 10px;
+  padding: 10px 0;
+  box-sizing: border-box;
+  font-weight: 600;
+  box-shadow: 0 2px 7px rgba(0,0,0,.35);
+}
+.accessData_li:nth-of-type(5){
+  margin-right: 0;
 }
 .accessData_Num {
   font-size: 40px;
