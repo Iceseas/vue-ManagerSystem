@@ -2,7 +2,7 @@
   <Modal v-model="modalData.modalBoolean" width="660">
     <div slot="header">
       <Icon type="ios-information-circle"></Icon>
-      <span>{{modalData.title}}</span>
+      <span style="font-size:20px">{{modalData.title}}</span>
     </div>
     <div>
       <Form :label-colon="true" :model="FormData.data" ref="formList" :rules="FormData.rules" :label-width="80">

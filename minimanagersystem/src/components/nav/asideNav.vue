@@ -18,7 +18,7 @@
         </MenuItem>
       </MenuGroup>
       <MenuGroup title="系统设置">
-        <MenuItem name="4">
+        <MenuItem name="3">
           <Icon type="md-heart" />
           基本设置
         </MenuItem>

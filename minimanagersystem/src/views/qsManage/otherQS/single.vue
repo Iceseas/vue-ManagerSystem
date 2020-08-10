@@ -49,11 +49,15 @@
       <div class="IcontainerTopRow">
         <div class="IcontainerTopTitle">查询列表</div>
         <div class="IcontainerTopBtns">
-          <el-button type="primary" @click="freshTableData()">刷新数据</el-button>
-          <el-button type="primary" @click="addNewQuestion()">添加选择题</el-button>
+          <el-button type="primary" @click="getDataList()"
+            >刷新数据</el-button
+          >
+          <el-button type="primary" @click="addNewQuestion()"
+            >添加选择题</el-button
+          >
         </div>
       </div>
-      <el-table
+      <!-- <el-table
         fit
         border
         :data="this.$store.state.tableData"
@@ -88,28 +92,34 @@
             >
           </template>
         </el-table-column>
-      </el-table>
+      </el-table> -->
+      <Table border ref="table" :height="table.height" :columns="table.columns" :data="table.data">
+        <template slot-scope="{ row, index }" slot="action">
+          <Button
+            type="primary"
+            size="small"
+            style="margin-right: 5px"
+            @click="handleEdit(index, row)">编辑</Button>
+          <Button
+            type="error"
+            size="small"
+            @click="handleDelete(index, row)">删除</Button>
+        </template>
+      </Table>
     </div>
-    <el-row class="showquestions_serch_add">
-      <el-col :span="24">
-        <div class="grid-content bg-purple">
-          <el-pagination
-            @current-change="handleCurrentChange"
-            :current-page="query.pageCurrent"
-            :page-size="query.pageSize"
-            layout="total, prev, pager, next, jumper"
-            :total="this.$store.state.total"
-          >
-          </el-pagination>
-        </div>
-      </el-col>
-    </el-row>
+    <Row class="showquestions_serch_add">
+      <Col :span="24">
+        <Page :total="this.$store.state.total" show-total :page-size="query.pageSize" @on-change="handleCurrentChange" />
+      </Col>
+    </Row>
     <singleQsForm ref="singleQsForm" @callBack="handleQsCallBack" />
   </div>
 </template>
 
 <script>
-import singleQsForm from './single/singleQsForm'
+import singleQsForm from "./single/singleQsForm";
+import axios from 'axios'
+import Axios from 'axios';
 export default {
   data() {
     return {
@@ -125,7 +135,7 @@ export default {
       currentPage4: 1,
       loading: false,
       // 现在的qsType
-      questionType: '',
+      questionType: "",
       // 章节
       chapterList: [
         {
@@ -184,6 +194,77 @@ export default {
           label: "第十一章",
         },
       ],
+      table: {
+        height: 575,
+        columns: [
+          {
+            type: "selection",
+            width: 60,
+            align: "center",
+          },
+          {
+            type: "index",
+            title: "序号",
+            width: 80,
+            align: "center",
+          },
+          {
+            title: "问题",
+            key: "Question",
+            align: "center",
+            tooltip: true,
+          },
+          {
+            title: "选项A",
+            key: "Item1",
+            align: "center",
+            tooltip: true,
+          },
+          {
+            title: "选项B",
+            key: "Item2",
+            align: "center",
+            tooltip: true,
+          },
+          {
+            title: "选项C",
+            key: "Item3",
+            align: "center",
+            tooltip: true,
+          },
+          {
+            title: "选项D",
+            key: "Item4",
+            align: "center",
+            tooltip: true,
+          },
+          {
+            title: "知识点",
+            key: "KN",
+            align: "center",
+            tooltip: true,
+          },
+          {
+            title: "章节",
+            key: "Chapter",
+            align: "center",
+            tooltip: true,
+          },
+          {
+            title: "难度",
+            key: "difficulty",
+            align: "center",
+            tooltip: true,
+          },
+          {
+            title: "操作",
+            slot: "action",
+            width: 180,
+            align: "center",
+          },
+        ],
+        data: [],
+      },
     };
   },
   mounted() {
@@ -196,15 +277,29 @@ export default {
       this.tableHeight = document.body.clientHeight - 395 + "px";
     });
     this.questionType = window.localStorage.getItem("questionType");
-    this.freshTableData();
+    this.getDataList();
   },
   methods: {
     handleEdit(index, row) {
-      this.$refs.singleQsForm.init('update', row)
+      this.$refs.singleQsForm.init("update", row);
     },
-    freshTableData() {
-      this.$store.dispatch("get_PageInfo_AJAX");
-      this.$store.dispatch("get_listData_AJAX");
+    getDataList() {
+      this.$Spin.show()
+      axios({
+        url: "http://localhost:3000/getQuestion/api/getlist",
+        method: "POST",
+        data: {
+          questionNum: 10,
+          nowQuestionType: 'single_C1',
+        },
+      }).then(res=>{
+        for(let i = 0;i<res.data.result.data.length;i++) {
+          this.table.data.push(JSON.parse(res.data.result.data[i]))
+        }
+        this.$Spin.hide()
+      }).catch(err=>{
+        console.log(err)
+      })
     },
     handleDelete(index, row) {
       this.$store.commit("changeNowDeleteDataId", row.Id);
@@ -216,25 +311,25 @@ export default {
       this.$store.dispatch("get_listData_AJAX");
     },
     addNewQuestion() {
-      this.$refs.singleQsForm.init('add', {})
+      this.$refs.singleQsForm.init("add", {});
     },
     // 处理添加的单选
-    handleQsCallBack(obj, type){
-      if (type === 'add') {
+    handleQsCallBack(obj, type) {
+      if (type === "add") {
         this.$store.commit("getAddData", obj);
         this.$store.dispatch("add_listData_AJAX");
-      } else if (type === 'update') {
+      } else if (type === "update") {
         this.$store.commit("getUpdateData", obj);
         this.$store.dispatch("update_listData_AJAX");
       }
-    }
+    },
   },
   beforeDestroy() {
     this.$store.state.isFromShow = false;
     this.$store.state.questionNum = 10;
   },
   components: {
-    singleQsForm
+    singleQsForm,
   },
 };
 </script>
