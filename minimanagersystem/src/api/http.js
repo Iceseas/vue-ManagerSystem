@@ -7,13 +7,13 @@ import QS from 'qs'
  * 可以切换不同的请求ip
  */
 
-axios.defaults.baseURL = 'xxx'
+axios.defaults.baseURL = 'http://localhost:3000/'
 
 /**
  * 设置axios请求超时 10s
  */
 
-axios.defaults.timeout = 10000
+axios.defaults.timeout = 5000
 
 /**
  * 设置post默认的请求头
@@ -29,7 +29,7 @@ axios.interceptors.request.use(
         // 为请求对象，添加token验证的authorization字段
         config.headers = {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-            'authorization': '获取token的方法'
+            // 'authorization': '获取token的方法'
         }
         return config;
     },

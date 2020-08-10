@@ -49,12 +49,8 @@
       <div class="IcontainerTopRow">
         <div class="IcontainerTopTitle">查询列表</div>
         <div class="IcontainerTopBtns">
-          <el-button type="primary" @click="freshTableData()"
-            >刷新数据</el-button
-          >
-          <el-button type="primary" @click="addNewQuestion()">{{
-            addButtonValue
-          }}</el-button>
+          <el-button type="primary" @click="freshTableData()">刷新数据</el-button>
+          <el-button type="primary" @click="addNewQuestion()">添加选择题</el-button>
         </div>
       </div>
       <el-table
@@ -109,15 +105,11 @@
       </el-col>
     </el-row>
     <singleQsForm ref="singleQsForm" @callBack="handleQsCallBack" />
-    <decideQsForm ref="decideQsForm" @callBack="handleQsCallBack" />
-    <vacancyQsForm ref="vacancyQsForm" @callBack="handleQsCallBack" />
   </div>
 </template>
 
 <script>
 import singleQsForm from './single/singleQsForm'
-import decideQsForm from './decide/decideQsForm'
-import vacancyQsForm from './vacancy/vacancyQsFrom'
 export default {
   data() {
     return {
@@ -131,11 +123,7 @@ export default {
       tableHeight: 0,
       data: null,
       currentPage4: 1,
-      input3: "",
-      select: "",
       loading: false,
-      addButtonValue: "",
-      FormTitle: "",
       // 现在的qsType
       questionType: '',
       // 章节
@@ -208,29 +196,11 @@ export default {
       this.tableHeight = document.body.clientHeight - 395 + "px";
     });
     this.questionType = window.localStorage.getItem("questionType");
-    let nowQuestionType = window.localStorage.getItem("questionType");
-    if (nowQuestionType.substring(0, 6) == "single") {
-      this.addButtonValue = "添加选择题";
-    } else if (nowQuestionType == "applicationQuestion") {
-      this.addButtonValue = "添加大题";
-    } else if (nowQuestionType.substring(0, 7) == "vacancy") {
-      this.addButtonValue = "添加填空题";
-    } else if (nowQuestionType == "decide") {
-      this.addButtonValue = "添加判断题";
-    }
     this.freshTableData();
   },
   methods: {
     handleEdit(index, row) {
-      if (this.questionType.substring(0, 6) == "single") {
-       this.$refs.singleQsForm.init('update', row)
-      } else if (this.questionType == "applicationQuestion") {
-        this.$refs.singleQsForm.init('update', row)
-      } else if (this.questionType.substring(0, 7) == "vacancy") {
-        this.$refs.vacancyQsForm.init('update', row)
-      } else if (this.questionType == "decide") {
-        this.$refs.decideQsForm.init('update', row)
-      }
+      this.$refs.singleQsForm.init('update', row)
     },
     freshTableData() {
       this.$store.dispatch("get_PageInfo_AJAX");
@@ -246,15 +216,7 @@ export default {
       this.$store.dispatch("get_listData_AJAX");
     },
     addNewQuestion() {
-      if (this.questionType.substring(0, 6) == "single") {
-       this.$refs.singleQsForm.init('add', {})
-      } else if (this.questionType == "applicationQuestion") {
-        this.$refs.singleQsForm.init('add', {})
-      } else if (this.questionType.substring(0, 7) == "vacancy") {
-        this.$refs.vacancyQsForm.init('add', {})
-      } else if (this.questionType == "decide") {
-        this.$refs.decideQsForm.init('add', {})
-      }
+      this.$refs.singleQsForm.init('add', {})
     },
     // 处理添加的单选
     handleQsCallBack(obj, type){
@@ -272,9 +234,7 @@ export default {
     this.$store.state.questionNum = 10;
   },
   components: {
-    singleQsForm,
-    decideQsForm,
-    vacancyQsForm
+    singleQsForm
   },
 };
 </script>

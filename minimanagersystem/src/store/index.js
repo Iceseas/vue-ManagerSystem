@@ -138,7 +138,7 @@ export default new Vuex.Store({
         });
     },
     update_listData_AJAX(store) {
-      store.state.loading = true;
+      store.state.vuethis.$Spin.show()
       axios({
         url: "http://localhost:3000/updateQuestion/api/updatelist",
         method: "POST",
@@ -149,12 +149,13 @@ export default new Vuex.Store({
       })
         .then((res) => {
           if (res.data.result.errcode == 0) {
-            store.state.vuethis.$nextTick(() => {
-              store.state.loading = false;
-            });
-            alert("更新成功！请点击刷新数据！");
+            store.state.vuethis.$Spin.hide()
+            store.state.vuethis.$Message.destroy()
+            store.state.vuethis.$Message.success('更新成功')
           } else {
-            alert("更新失败，请检查参数");
+            store.state.vuethis.$Spin.hide()
+            store.state.vuethis.$Message.destroy()
+            store.state.vuethis.$Message.error('更新失败，请联系管理员')
           }
         })
         .catch((err) => {
@@ -162,7 +163,7 @@ export default new Vuex.Store({
         });
     },
     add_listData_AJAX(store) {
-      store.state.loading = true;
+      store.state.vuethis.$Spin.show()
       axios({
         url: "http://localhost:3000/addQuestion/api/addQuestionData",
         method: "POST",
@@ -174,11 +175,14 @@ export default new Vuex.Store({
         .then((res) => {
           if (res.data.AddmodelNewDataOresult.errcode == 0) {
             store.state.vuethis.$nextTick(() => {
-              store.state.loading = false;
             });
-            alert("添加成功！请点击刷新数据！");
+            store.state.vuethis.$Spin.hide()
+            store.state.vuethis.$Message.destroy()
+            store.state.vuethis.$Message.success('新增成功')
           } else {
-            alert("添加失败，请检查参数");
+            store.state.vuethis.$Spin.hide()
+            store.state.vuethis.$Message.destroy()
+            store.state.vuethis.$Message.error('新增失败，请联系管理员')
           }
         })
         .catch((err) => {
@@ -186,7 +190,7 @@ export default new Vuex.Store({
         });
     },
     Delete_listData_AJAX(store) {
-      store.state.loading = true;
+      store.state.vuethis.$Spin.show()
       axios({
         url: "http://localhost:3000/deleteQuestion/api/DeleteQuestionData",
         method: "POST",
@@ -197,12 +201,13 @@ export default new Vuex.Store({
       })
         .then((res) => {
           if (res.data.DeletemodelDataresult.errcode == 0) {
-            store.state.vuethis.$nextTick(() => {
-              store.state.loading = false;
-            });
-            alert("删除成功！请点击刷新数据！");
+            store.state.vuethis.$Spin.hide()
+            store.state.vuethis.$Message.destroy()
+            store.state.vuethis.$Message.success('删除成功')
           } else {
-            alert("删除失败，请检查！");
+            store.state.vuethis.$Spin.hide()
+            store.state.vuethis.$Message.destroy()
+            store.state.vuethis.$Message.error('删除失败，请联系管理员')
           }
         })
         .catch((err) => {

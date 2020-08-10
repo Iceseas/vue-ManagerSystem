@@ -1,20 +1,30 @@
 <template>
-  <div>
-    <div class="page-header">
-      <el-page-header @back="goBack" content="访问记录"></el-page-header>
-    </div>
+  <div :style="`height:${pageHeight}`">
     <div class="logEchars" id="logEchars" ref="logEchars"></div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      pageHeight: 0
+    }
+  },
   methods: {
     goBack() {
       this.$router.replace("/Managerindex/index");
     },
   },
   mounted() {
+    window.onresize = () => {
+      this.$nextTick(() => {
+        this.pageHeight = document.body.clientHeight - 155 + "px";
+      });
+    };
+    this.$nextTick(() => {
+      this.pageHeight = document.body.clientHeight - 155 + "px";
+    });
     const logEchars = this.$echarts.init(this.$refs.logEchars);
     var option = {
       legend: {},

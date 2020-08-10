@@ -50,9 +50,6 @@
                 placeholder="请输入您的密码"
               />
             </div>
-            <div class="login_isremember">
-              <el-radio v-model="radio" label="1">记住密码</el-radio>
-            </div>
           </form>
           <button class="login_button" @click="handleLogin()">
             <i class="el-icon-switch-button button_icon"></i>
@@ -285,6 +282,7 @@ export default {
   height: 100%;
   margin-left: 20px;
   opacity: 0.9;
+  font-size: 12px;
 }
 
 input::-webkit-input-placeholder {

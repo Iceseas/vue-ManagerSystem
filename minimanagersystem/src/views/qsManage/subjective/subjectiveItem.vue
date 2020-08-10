@@ -168,6 +168,7 @@
 		},
 		beforeDestroy() {
 			this.$store.state.isFromShow = false;
+			this.$store.state.questionNum = 10;
 		},
 	};
 </script>
