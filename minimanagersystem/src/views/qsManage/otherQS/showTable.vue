@@ -79,6 +79,11 @@
         <el-table-column align="center" label="操作" width="150">
           <template slot-scope="scope">
             <el-button
+              size="mini"
+              @click="handleShow(scope.$index, scope.row)"
+              >查看</el-button
+            >
+            <el-button
               type="primary"
               size="mini"
               @click="handleEdit(scope.$index, scope.row)"
@@ -256,6 +261,17 @@ export default {
         this.$refs.decideQsForm.init('add', {})
       }
     },
+    handleShow(index, row) {
+      if (this.questionType.substring(0, 6) == "single") {
+       this.$refs.singleQsForm.init('show', row)
+      } else if (this.questionType == "applicationQuestion") {
+        this.$refs.singleQsForm.init('show', row)
+      } else if (this.questionType.substring(0, 7) == "vacancy") {
+        this.$refs.vacancyQsForm.init('show', row)
+      } else if (this.questionType == "decide") {
+        this.$refs.decideQsForm.init('show', row)
+      }
+    },
     // 处理添加的单选
     handleQsCallBack(obj, type){
       if (type === 'add') {
@@ -264,7 +280,7 @@ export default {
       } else if (type === 'update') {
         this.$store.commit("getUpdateData", obj);
         this.$store.dispatch("update_listData_AJAX");
-      }
+      } 
     }
   },
   beforeDestroy() {
@@ -282,5 +298,8 @@ export default {
 <style scoped>
 >>> .el-date-editor {
   width: 100% !important;
+}
+>>>.el-button--mini {
+  padding: 5px 5px;
 }
 </style>
