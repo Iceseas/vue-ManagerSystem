@@ -112,8 +112,8 @@ export default {
       })
         .then((res) => {
           if (res.data.error == 0) {
-            this.$store.commit("nowLoginUserCount", that.managerCount);
             localStorageSetData('nowLoginUserCount', that.managerCount)
+            localStorageSetData('nowLoginUserName', res.data.userName)
             setCookie('token', that.managerCount)
             this.$Spin.hide()
             this.$Message.destroy()

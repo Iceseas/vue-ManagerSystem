@@ -5,26 +5,40 @@
 </template>
 
 <script>
+import {
+  localStorageGetData,
+  localStorageRemoveData,
+} from "@/util/localStorageData";
+import axios from "axios";
+import { removeCookie } from "@/util/cookie";
 export default {
   data() {
-    return {};
+    return {
+      welcomeManager: "",
+    };
+  },
+  mounted() {
+    this.welcomeManager = localStorageGetData("nowLoginUserCount");
   },
   components: {},
-  created() {
-    //在页面加载时读取sessionStorage里的状态信息
-    if (sessionStorage.getItem("store")) {
-      this.$store.replaceState(
-        Object.assign(
-          {},
-          this.$store.state,
-          JSON.parse(sessionStorage.getItem("store"))
-        )
-      );
-    }
-    //在页面刷新时将vuex里的信息保存到sessionStorage里
-    window.addEventListener("beforeunload", () => {
-      sessionStorage.setItem("store", JSON.stringify(this.$store.state));
-    });
+  beforeDestory() {
+    axios({
+      url: "http://localhost:3000/ManagerCount/api/logOut",
+      method: "POST",
+      data: {
+        managerCount: this.welcomeManager,
+      },
+    })
+      .then((res) => {
+        if (res.data.error == 0) {
+          localStorageRemoveData("nowLoginUserCount");
+          removeCookie("token");
+        }
+      })
+      .catch((err) => {
+        localStorageRemoveData("nowLoginUserCount");
+        removeCookie("token");
+      });
   },
 };
 </script>

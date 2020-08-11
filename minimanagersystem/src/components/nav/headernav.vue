@@ -67,7 +67,8 @@ export default {
     };
   },
   mounted() {
-    this.welcomeManager = localStorageGetData("nowLoginUserCount");
+    this.welcomeManager = localStorageGetData("nowLoginUserName");
+    this.nowOnlineManager = localStorageGetData("nowLoginUserCount");
   },
   methods: {
     // 退出
@@ -81,18 +82,21 @@ export default {
             url: "http://localhost:3000/ManagerCount/api/logOut",
             method: "POST",
             data: {
-              managerCount: this.welcomeManager,
+              managerCount: this.nowOnlineManager,
             },
           })
             .then((res) => {
               if (res.data.error == 0) {
                 localStorageRemoveData("nowLoginUserCount");
+                localStorageRemoveData("nowLoginUserName");
                 removeCookie("token");
                 this.$Spin.hide();
                 this.$Message.destroy();
                 this.$Message.success(res.data.msg);
                 this.$router.replace("/login");
               } else {
+                localStorageRemoveData("nowLoginUserCount");
+                localStorageRemoveData("nowLoginUserName");
                 this.$Spin.hide();
                 this.$Message.destroy();
                 this.$Message.error(res.data.msg);
@@ -101,6 +105,7 @@ export default {
             })
             .catch((err) => {
               localStorageRemoveData("nowLoginUserCount");
+              localStorageRemoveData("nowLoginUserName");
               removeCookie("token");
               this.$Spin.hide();
               this.$Message.destroy();
