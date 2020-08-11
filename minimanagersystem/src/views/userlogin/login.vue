@@ -100,6 +100,7 @@ export default {
     },
     handleLogin() {
       let that = this;
+      this.$Spin.show()
       axios({
         url: "http://localhost:3000/ManagerCount/api/checkLogin",
         method: "POST",
@@ -114,15 +115,22 @@ export default {
             this.$store.commit("nowLoginUserCount", that.managerCount);
             localStorageSetData('nowLoginUserCount', that.managerCount)
             setCookie('token', that.managerCount)
+            this.$Spin.hide()
+            this.$Message.destroy()
+            this.$Message.success(res.data.msg)
             this.$router.push({
               path: '/Managerindex/index'
             });
           } else {
-            alert(res.data.msg);
+            this.$Spin.hide()
+            this.$Message.destroy()
+            this.$Message.error(res.data.msg)
           }
         })
         .catch((err) => {
-          console.log(err);
+          this.$Spin.hide()
+          this.$Message.destroy()
+          this.$Message.error(err.msg)
         });
     },
   },

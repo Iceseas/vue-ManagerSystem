@@ -7,7 +7,12 @@
           欢迎您:{{ welcomeManager }} 老师
         </li>
         <li class="headernav_ShowUserMsg_li">
-          <Button type="primary" shape="circle" icon="md-person" @click="showNowUser"></Button>
+          <Button
+            type="primary"
+            shape="circle"
+            icon="md-person"
+            @click="showNowUser"
+          ></Button>
         </li>
         <li class="headernav_ShowUserMsg_li">
           <Button type="primary" shape="circle" icon="ios-text"></Button>
@@ -24,17 +29,23 @@
     </div>
     <!-- 当前用户显示信息 -->
     <Modal v-model="showUserMsgModal" width="360">
-        <div slot="header" style="color:#f60;text-align:center">
-          <p>当前用户</p>
-        </div>
-        <div style="text-align:center">
-            <Avatar src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1674760321,2881373110&fm=26&gp=0.jpg" icon="ios-person" size="large" />
-            <p>{{ welcomeManager }}</p>
-            <p>老师</p>
-        </div>
-        <div slot="footer">
-            <Button type="primary" size="large" long @click="closeShowUser">确定</Button>
-        </div>
+      <div slot="header" style="color:#f60;text-align:center">
+        <p>当前用户</p>
+      </div>
+      <div style="text-align:center">
+        <Avatar
+          src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1674760321,2881373110&fm=26&gp=0.jpg"
+          icon="ios-person"
+          size="large"
+        />
+        <p>{{ welcomeManager }}</p>
+        <p>老师</p>
+      </div>
+      <div slot="footer">
+        <Button type="primary" size="large" long @click="closeShowUser"
+          >确定</Button
+        >
+      </div>
     </Modal>
   </div>
 </template>
@@ -44,6 +55,7 @@ import {
   localStorageGetData,
   localStorageRemoveData,
 } from "@/util/localStorageData";
+import axios from 'axios'
 import { removeCookie } from "@/util/cookie";
 export default {
   data() {
@@ -64,13 +76,39 @@ export default {
         title: "退出",
         content: "<p>确定要退出吗</p>",
         onOk: () => {
-          localStorageRemoveData("nowLoginUserCount");
-          removeCookie("token");
-          this.$router.replace("/login");
-          this.$Message.info("退出成功");
+          this.$Spin.show();
+          axios({
+            url: "http://localhost:3000/ManagerCount/api/logOut",
+            method: "POST",
+            data: {
+              managerCount: this.welcomeManager,
+            },
+          })
+            .then((res) => {
+              if (res.data.error == 0) {
+                localStorageRemoveData("nowLoginUserCount");
+                removeCookie("token");
+                this.$Spin.hide();
+                this.$Message.destroy();
+                this.$Message.success(res.data.msg);
+                this.$router.replace("/login");
+              } else {
+                this.$Spin.hide();
+                this.$Message.destroy();
+                this.$Message.error(res.data.msg);
+                this.$router.replace("/login");
+              }
+            })
+            .catch((err) => {
+              localStorageRemoveData("nowLoginUserCount");
+              removeCookie("token");
+              this.$Spin.hide();
+              this.$Message.destroy();
+              this.$Message.error(err.msg);
+              this.$router.replace("/login");
+            });
         },
-        onCancel: () => {
-        },
+        onCancel: () => {},
       });
     },
     // 显示当前用户信息
@@ -79,7 +117,7 @@ export default {
     },
     closeShowUser() {
       this.showUserMsgModal = false;
-    }
+    },
   },
 };
 </script>
