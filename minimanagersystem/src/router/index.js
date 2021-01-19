@@ -76,15 +76,15 @@ const router = new VueRouter({
   routes,
 });
 // 页面检查cookie是否含有token
-router.beforeEach((to, from, next) => {
-  if (to.meta.checkLogined) {
-    if (getCookie("token") == null) {
-      next("login");
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.checkLogined) {
+//     if (getCookie("token") == null) {
+//       next("login");
+//     } else {
+//       next();
+//     }
+//   } else {
+//     next();
+//   }
+// });
 export default router;

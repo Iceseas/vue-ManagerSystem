@@ -132,6 +132,10 @@ export default {
           this.$Message.destroy()
           this.$Message.error(err.msg)
         });
+      // this.$router.push({
+      //         path: '/Managerindex/index'
+      //       });
+      //       this.$Spin.hide()
     },
   },
 };
